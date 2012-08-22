@@ -219,8 +219,6 @@ cb() { git checkout $@ ;}
 alias copy=cp
 alias python='/cygdrive/c/Python/2_6/python'
 alias cython='/usr/bin/python'
-export VG_DATA_PATH="/cygdrive/c/Users/mwadsten/AppData/Roaming/Virtual Gateway/"
-alias vgdata='cd "`echo $VG_DATA_PATH`"; la'
 
 log() { git log -$@ ;}
 slog() { git shortlog -$@ ;}
