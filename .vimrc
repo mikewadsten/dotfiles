@@ -12,3 +12,6 @@ nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
 set colorcolumn=80      " highlight 80th column for line length "
 set nocp
+set wildmode=list:longest " more useful autocomplete 
+set scrolloff=3 " more context around cursor when scrolling
+filetype plugin on
