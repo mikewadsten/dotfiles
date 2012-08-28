@@ -1,0 +1,10 @@
+BoldAsFont=yes
+FontHeight=11
+Transparency=low
+OpaqueWhenFocused=yes
+ForegroundColour=255,255,255
+BackgroundColour=43,34,45
+FontSmoothing=full
+ClicksPlaceCursor=yes
+Scrollbar=right
+Font=Consolas
