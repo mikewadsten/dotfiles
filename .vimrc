@@ -15,3 +15,5 @@ set nocp
 set wildmode=list:longest " more useful autocomplete 
 set scrolloff=3 " more context around cursor when scrolling
 filetype plugin on
+set ruler
+set fileformat=unix
