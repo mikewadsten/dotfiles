@@ -1,19 +1,54 @@
-syntax on               " syntax highlighting "
-set background=dark     " bright colors! "
-set tabstop=4           " make tab = 4 spaces "
-set expandtab           " tab turns to spaces "
-set shiftwidth=4        " something about tabs "
-set shiftround          " automatically tab to interval of 4? "
-set autoindent          " auto-indent on new line "
-set number              " show line numbers "
+" pretty colors
+syntax on
+
+" light up the darkness
+set background=dark
+
+" show line numbers
+set number
+
+" show cursor position in status bar
+set ruler
+
+" tab should be 4 spaces
+set tabstop=4
+set expandtab
+set shiftwidth=4
+set shiftround
+
+" auto-indent on new line
+set autoindent
+
+" key mappings to move between split windows with Alt-arrow
 nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
-set colorcolumn=80      " highlight 80th column for line length "
+
+" highlight 80th column for line length
+set colorcolumn=80
+
+" makes vim more useful
 set nocp
-set wildmode=list:longest " more useful autocomplete 
-set scrolloff=3 " more context around cursor when scrolling
+
+" more useful autocompletion
+set wildmode=list:longest
+
+" scroll when within 3 lines of window edge
+set scrolloff=3
+
+" automatically detect the file type based on extension
 filetype plugin on
-set ruler
+
+" unix file formatting ftw
 set fileformat=unix
+
+" pathogen
+call pathogen#infect()
+
+" allow backspace to delete indenting, EOL, and over the start of insert
+" thanks josh davis (github.com/jdavis/dotfiles/.vimrc)
+set backspace=indent,eol,start
+
+" map leader key to comma, because backslash sucks
+let mapleader = ","
