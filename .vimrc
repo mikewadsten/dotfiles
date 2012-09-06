@@ -52,3 +52,7 @@ set backspace=indent,eol,start
 
 " map leader key to comma, because backslash sucks
 let mapleader = ","
+
+" Autoclose Plugin options
+let g:AutoClosePairs = "<> () {} [] \" ' `"
+au FileType html,php,xhtml,xml,xrc let g:AutoClosePairs_del = "<>""'
