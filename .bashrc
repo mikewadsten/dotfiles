@@ -66,6 +66,27 @@ d() {
     exec 2> /dev/tty
 }
 
+# Wrap git-commit and svn-commit in commit command
+commit() {
+    # Suppress stderr
+    exec 2> /dev/null
+    if git rev-parse
+    then
+        # Current directory is under git control
+        exec 2> /dev/tty # Unsuppress stderr
+        git commit $@
+    elif [[ -d "$PWD"/.svn ]]
+    then
+        # Current directory is under svn control
+        exec 2> /dev/tty # Unsuppress stderr
+        svn commit $@
+    else
+        _sderror $FUNCNAME
+    fi
+    # Unsuppress stderr
+    exec 2> /dev/tty
+}
+
 alias ack=ack-grep
 alias copy=cp
 #alias python='/cygdrive/c/Python/2_6/python'
