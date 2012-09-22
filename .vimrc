@@ -2,6 +2,7 @@
 syntax on
 
 " light up the darkness
+set background=light " go light then dark to totally force dark setting
 set background=dark
 
 " show line numbers
