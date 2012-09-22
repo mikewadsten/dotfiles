@@ -54,5 +54,5 @@ set backspace=indent,eol,start
 let mapleader = ","
 
 " Autoclose Plugin options
-let g:AutoClosePairs = "<> () {} [] \" ' `"
+let g:AutoClosePairs = "() {} [] \" ' `"
 au FileType html,php,xhtml,xml,xrc let g:AutoClosePairs_del = "<>""'
