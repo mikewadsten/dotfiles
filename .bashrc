@@ -24,6 +24,7 @@ alias push='git push'
 alias pull='git pull'
 alias sincetag='git shortlog `git describe --abbrev=0 --tags`..HEAD'
 cb() { git checkout $@ ;}
+cd() { builtin cd $@ && ls; }
 
 # REALLY? A function to print an error? Yeah...
 _sderror() { echo "$1: Current directory has no version control!" ;}
