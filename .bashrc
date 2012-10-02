@@ -122,4 +122,5 @@ extract() {
 }
 
 # prompt coloration
-export PS1="\n\e[1;32m\u@\h:\w\n\e[1;32m$ \e[m"
+export PS1='\[\e[1;32m\]\r\n\u@\h:\w\r\n\$\[\e[0m\] '
+export CSESVN=https://www-users.cselabs.umn.edu/svn/F12C3081
