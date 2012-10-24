@@ -88,7 +88,18 @@ commit() {
     exec 2> /dev/tty
 }
 
-alias ack=ack-grep
+# On CSE labs machines, alias ack to standalone version of ack,
+# and make the prompt red
+if [ "$(whoami)" == "wadst007" ]; then
+    alias ack='~/bin/ack'
+    export PS1='\[\e[1;31m\]\r\n\u@\h:\w\r\n\$\[\e[0m\] '
+fi
+# On my personal machines, alias ack to ack-grep, and make the prompt green
+if [ "$(whoami)" == "mike" ]; then
+    alias ack=ack-grep
+    export PS1='\[\e[1;32m\]\r\n\u@\h:\w\r\n\$\[\e[0m\] '
+fi
+
 alias copy=cp
 #alias python='/cygdrive/c/Python/2_6/python'
 #alias cython='/usr/bin/python'
@@ -122,5 +133,5 @@ extract() {
 }
 
 # prompt coloration
-export PS1='\[\e[1;32m\]\r\n\u@\h:\w\r\n\$\[\e[0m\] '
+#export PS1='\[\e[1;31m\]\r\n\u@\h:\w\r\n\$\[\e[0m\] '
 export CSESVN=https://www-users.cselabs.umn.edu/svn/F12C3081
