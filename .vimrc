@@ -78,6 +78,9 @@ au FocusLost * :wa
 set cursorline
 highlight cursorline cterm=NONE ctermbg=Black
 
-" map <leader>dd to delete to black hole register
-nnoremap <leader>d "_d
-vnoremap <leader>d "_d
+" map <leader>d to delete to black hole register
+nnoremap <leader>d "_dd
+vnoremap <leader>d "_dd
+" map <leader>w to remove trailing whitespace across file
+nnoremap <leader>w :%s/\s\+$//e<CR>
+vnoremap <leader>w :%s/\s\+$//e<CR>
