@@ -88,25 +88,33 @@ commit() {
     exec 2> /dev/tty
 }
 
+ENDCOLOR='\[\033[0m\]'
 # On CSE labs machines, alias ack to standalone version of ack,
-# and make the prompt red
+# and make the prompt ]'d
 if [ "$(whoami)" == "wadst007" ]; then
     alias ack='~/bin/ack'
-    export PS1='\[\e[1;31m\]\r\n\u@\h:\w\r\n\$\[\e[0m\] '
+    RED='\[\033[1;31m\]'
+    export PS1="\n${RED}\u@\h:\w\n\$ ${ENDCOLOR}"
 fi
 # On my personal machines, alias ack to ack-grep, and make the prompt green
 if [ "$(whoami)" == "mike" ]; then
     alias ack=ack-grep
-    export PS1='\[\e[1;32m\]\r\n\u@\h:\w\r\n\$\[\e[0m\] '
+    GREEN='\[\033[1;32m\]'
+    export PS1="\n${GREEN}\u@\h:\w\n\$ ${ENDCOLOR}"
+fi
+# On my work computer, make the prompt cyan, set up some aliases
+if [ "$(whoami)" == "mwadsten" ]; then
+    CYAN='\[\033[1;36m\]'
+    export PS1="\n${CYAN}\u@\h:\w\n\$ ${ENDCOLOR}"
+    export FBOARDPATH=/cygdrive/c/HelloFreedom/
+    alias python='/cygdrive/c/Python/2_6/python'
+    alias cython='/usr/bin/python'
 fi
 
 alias copy=cp
-#alias python='/cygdrive/c/Python/2_6/python'
-#alias cython='/usr/bin/python'
 
 log() { git log -$@ ;}
 slog() { git shortlog -$@ ;}
-export FBOARDPATH=/cygdrive/c/HelloFreedom/
 
 back() { cd $OLDPWD ;}
 # Uncompress depending on extension
@@ -132,6 +140,4 @@ extract() {
     fi
 }
 
-# prompt coloration
-#export PS1='\[\e[1;31m\]\r\n\u@\h:\w\r\n\$\[\e[0m\] '
 export CSESVN=https://www-users.cselabs.umn.edu/svn/F12C3081
