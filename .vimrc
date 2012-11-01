@@ -64,8 +64,15 @@ au FocusLost * :wa
 " map leader key to comma, because backslash sucks
 let mapleader = ","
 
-" pathogen
-"call pathogen#infect()
+" search improvements
+set ignorecase smartcase
+set hlsearch
+set incsearch
+set showmatch
+
+" Show the current command at the bottom
+set showcmd
+
 
 
 "
@@ -116,6 +123,16 @@ nmap <leader>vi :BundleInstall<CR>
 nmap <leader>vI :BundleInstall!<CR>
 nmap <leader>vc :BundleClean<CR>
 nmap <leader>vC :BundleClean!<CR>
+
+" Clear search highlighting
+nmap <leader>/ :nohlsearch<CR>
+
+" Make up/down jump to next line in editor, not file
+nmap <Up> g<Up>
+nmap <Down> g<Down>
+
+" Save keystrokes
+nnoremap ; :
 
 
 "
