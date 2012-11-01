@@ -2,6 +2,7 @@
 syntax on
 
 " light up the darkness
+set background=light " go light then dark to totally force dark setting
 set background=dark
 
 " show line numbers
@@ -27,6 +28,7 @@ nmap <silent> <A-Right> :wincmd l<CR>
 
 " highlight 80th column for line length
 set colorcolumn=80
+hi colorcolumn ctermbg=DarkBlue
 
 " makes vim more useful
 set nocp
@@ -36,6 +38,10 @@ set wildmode=list:longest
 
 " scroll when within 3 lines of window edge
 set scrolloff=3
+
+" persistent undo
+set undodir=~/.vim/undodir
+set undofile
 
 " automatically detect the file type based on extension
 filetype plugin on
@@ -53,6 +59,28 @@ set backspace=indent,eol,start
 " map leader key to comma, because backslash sucks
 let mapleader = ","
 
+" flake8 ignores
+let g:flake8_ignore="E501,W802"
+
 " Autoclose Plugin options
-let g:AutoClosePairs = "<> () {} [] \" ' `"
+let g:AutoClosePairs = "() {} [] \" ' `"
 au FileType html,php,xhtml,xml,xrc let g:AutoClosePairs_del = "<>""'
+
+highlight ExtraWhitespace ctermbg=red
+au ColorScheme * highlight ExtraWhitespace guibg=red
+au BufEnter * match ExtraWhitespace /\s\+$/
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhitespace /\s\+$/
+
+" Auto save on focus lost.
+au FocusLost * :wa
+
+set cursorline
+highlight cursorline cterm=NONE ctermbg=Black
+
+" map <leader>d to delete to black hole register
+nnoremap <leader>d "_dd
+vnoremap <leader>d "_dd
+" map <leader>w to remove trailing whitespace across file
+nnoremap <leader>w :%s/\s\+$//e<CR>
+vnoremap <leader>w :%s/\s\+$//e<CR>
