@@ -131,6 +131,13 @@ nmap <leader>/ :nohlsearch<CR>
 nmap <Up> g<Up>
 nmap <Down> g<Down>
 
+" ack.vim
+noremap <leader>a :Ack <cword><CR>
+noremap <leader>A :Ack<Space>
+
+" map leader-s to search for the word under cursor
+noremap <silent> <leader>s :exe "/".expand("<cword>")<CR>
+
 " Save keystrokes
 nnoremap ; :
 
