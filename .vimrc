@@ -171,6 +171,9 @@ Bundle 'ervandew/supertab'
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 
+" ack-vim
+Bundle 'mileszs/ack.vim'
+
 
 "
 " Plugin settings
