@@ -109,10 +109,10 @@ nnoremap <leader>w :%s/\s\+$//e<CR>
 vnoremap <leader>w :%s/\s\+$//e<CR>
 
 " I use tabs now. Tabs are cool.
-nnoremap <leader>tt :tabnew<CR>
-nnoremap <leader>tp :tabprev<CR>
-nnoremap <leader>tn :tabnext<CR>
-nnoremap <leader>tc :tabclose<CR>
+nnoremap <silent> <leader>tt :tabnew<CR>
+nnoremap <silent> <leader>tp :tabprev<CR>
+nnoremap <silent> <leader>tn :tabnext<CR>
+nnoremap <silent> <leader>tq :tabclose<CR>
 
 " Toggle NERDTree
 nmap <leader>b :NERDTreeTabsToggle<CR>
