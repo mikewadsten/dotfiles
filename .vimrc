@@ -18,9 +18,6 @@ set background=dark
 " Vundle requirement
 filetype off
 
-" Load plugins and indent for the filetype
-filetype plugin indent on
-
 " show cursor position in status bar
 set ruler
 
@@ -185,3 +182,6 @@ let g:flake8_ignore="E501,W802"
 " Autoclose Plugin options
 let g:AutoClosePairs = "() {} [] \" ' `"
 au FileType html,php,xhtml,xml,xrc let g:AutoClosePairs_del = "<>""'
+
+" Load plugins and indent for the filetype
+filetype plugin indent on
