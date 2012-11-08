@@ -84,6 +84,7 @@ au ColorScheme * highlight ExtraWhitespace guibg=red
 au BufEnter * match ExtraWhitespace /\s\+$/
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhitespace /\s\+$/
+nnoremap <leader>qq :ConqueTermVSplit bash<CR>
 
 highlight cursorline cterm=NONE ctermbg=Black
 
@@ -141,6 +142,9 @@ noremap <silent> <leader>s :exe "/".expand("<cword>")<CR>
 " Save keystrokes
 nnoremap ; :
 
+" Show yank-ring contents
+nnoremap <silent> <F9> :YRShow<CR>
+
 
 "
 " Bundle/Vundle settings
@@ -174,6 +178,12 @@ Bundle 'jistr/vim-nerdtree-tabs'
 " ack-vim
 Bundle 'mileszs/ack.vim'
 
+" a.vim - switch between header and source files easily
+Bundle 'vim-scripts/a.vim'
+
+" Yank ring
+Bundle 'vim-scripts/YankRing.vim'
+
 
 "
 " Plugin settings
@@ -185,3 +195,8 @@ let g:flake8_ignore="E501,W802"
 " Autoclose Plugin options
 let g:AutoClosePairs = "() {} [] \" ' `"
 au FileType html,php,xhtml,xml,xrc let g:AutoClosePairs_del = "<>""'
+
+let g:ConqueTerm_CloseOnEnd = 1
+
+let g:syntastic_enable_signs=1
+let g:syntastic_quiet_warnings=1
