@@ -70,6 +70,9 @@ set showmatch
 " Show the current command at the bottom
 set showcmd
 
+" Necessary for crap
+set laststatus=2
+set encoding=utf-8
 
 
 "
@@ -181,6 +184,9 @@ Bundle 'vim-scripts/a.vim'
 " Yank ring
 Bundle 'vim-scripts/YankRing.vim'
 
+" Powerline, because why not
+Bundle 'Lokaltog/vim-powerline'
+
 
 "
 " Plugin settings
@@ -195,8 +201,7 @@ au FileType html,php,xhtml,xml,xrc let g:AutoClosePairs_del = "<>""'
 
 let g:ConqueTerm_CloseOnEnd = 1
 
-let g:syntastic_enable_signs=1
-let g:syntastic_quiet_warnings=1
+let g:Powerline_symbols = 'compatible'
 
 " Load plugins and indent for the filetype
 filetype plugin indent on
