@@ -18,9 +18,6 @@ set background=dark
 " Vundle requirement
 filetype off
 
-" Load plugins and indent for the filetype
-filetype plugin indent on
-
 " show cursor position in status bar
 set ruler
 
@@ -200,3 +197,6 @@ let g:ConqueTerm_CloseOnEnd = 1
 
 let g:syntastic_enable_signs=1
 let g:syntastic_quiet_warnings=1
+
+" Load plugins and indent for the filetype
+filetype plugin indent on
