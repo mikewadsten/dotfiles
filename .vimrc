@@ -80,10 +80,10 @@ set encoding=utf-8
 "
 
 highlight ExtraWhitespace ctermbg=red
-au ColorScheme * highlight ExtraWhitespace guibg=red
-au BufEnter * match ExtraWhitespace /\s\+$/
-au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-au InsertLeave * match ExtraWhitespace /\s\+$/
+"au ColorScheme * highlight ExtraWhitespace guibg=red
+"au BufEnter * match ExtraWhitespace /\s\+$/
+"au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+"au InsertLeave * match ExtraWhitespace /\s\+$/
 
 highlight cursorline cterm=NONE ctermbg=Black
 
@@ -105,8 +105,8 @@ nnoremap <leader>d "_dd
 vnoremap <leader>d "_dd
 
 " map <leader>w to remove trailing whitespace across file
-nnoremap <leader>w :%s/\s\+$//e<CR>
-vnoremap <leader>w :%s/\s\+$//e<CR>
+nnoremap <leader>W :%s/\s\+$//e<CR>
+vnoremap <leader>W :%s/\s\+$//e<CR>
 
 " I use tabs now. Tabs are cool.
 nnoremap <silent> <leader>tt :tabnew<CR>
@@ -143,6 +143,9 @@ nnoremap ; :
 
 " Show yank-ring contents
 nnoremap <silent> <F9> :YRShow<CR>
+
+nnoremap <silent> <Leader>wn :match ExtraWhitespace /^\s* \s*\<Bar>\s+$/<CR>
+nnoremap <silent> <Leader>wf :match<CR>
 
 
 "
