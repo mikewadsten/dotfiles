@@ -1,0 +1,42 @@
+[advice]
+    statusHints = false # don't show how to unstage files, etc.
+[user]
+    name = Mike Wadsten
+    email = mikewadsten@gmail.com
+[core]
+    editor = vim
+[help]
+    autocorrect = 1
+[github]
+    user = mikewadsten
+[alias] # Some stolen from Josh Davis
+    a = add
+    br = branch
+    ci = commit
+    cl = clone
+    co = checkout
+    d = diff
+    dc = diff --cached # Include staged files
+    h = help
+    l = log
+    pu = push
+    pl = pull
+    re = reset
+    rs = reset
+    rv = reverti
+    s = status --short
+    sl = shortlog
+    st = status
+    un = reset HEAD
+    unstage = reset HEAD
+[color]
+    ui = true
+    [color "diff"]
+        meta = yellow bold
+        frag = magenta bold
+        old = red bold
+        new = green bold
+        whitespace = white bold
+# Somehow necessary for https (or ssh?) connections
+[http]
+    sslVerify = false
