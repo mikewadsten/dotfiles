@@ -2,6 +2,9 @@
 " Global Settings
 "
 
+" makes vim more useful
+set nocp
+
 " Need moar history
 set history=1000
 
@@ -33,9 +36,6 @@ set autoindent
 " persistent undo
 set undodir=~/.vim/undodir
 set undofile
-
-" makes vim more useful
-set nocp
 
 " more useful autocompletion
 set wildmode=list:longest
@@ -144,7 +144,7 @@ nnoremap ; :
 " Show yank-ring contents
 nnoremap <silent> <F9> :YRShow<CR>
 
-nnoremap <silent> <Leader>wn :match ExtraWhitespace /^\s* \s*\<Bar>\s+$/<CR>
+nnoremap <silent> <Leader>wn :match ExtraWhitespace /\s\+$/<CR>
 nnoremap <silent> <Leader>wf :match<CR>
 
 
@@ -212,6 +212,13 @@ if has("unix") && !has("win32unix")
     let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
 endif
 
+" Git-related bundles
+
+" Vim-Git runtime files
+Bundle 'tpope/vim-git'
+" Vim + Git = awesome?
+Bundle 'tpope/vim-fugitive'
+
 
 "
 " Plugin settings
@@ -225,6 +232,9 @@ let g:AutoClosePairs = "() {} [] \" ' `"
 au FileType html,php,xhtml,xml,xrc let g:AutoClosePairs_del = "<>""'
 
 let g:Powerline_symbols = 'compatible'
+
+" Powerline segment to indicate the presence of trailing whitespace
+call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
 " Load plugins and indent for the filetype
 filetype plugin indent on
