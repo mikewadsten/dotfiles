@@ -53,6 +53,8 @@ module load mozilla soft/openoffice
 #module load soft/gcc/3.4
 module load soft/sml
 
+setenv EDITOR vi
+setenv VISUAL vi
 # Do the magic to exec bash
 if ($?RANONCE == 0) then
         setenv RANONCE 0
