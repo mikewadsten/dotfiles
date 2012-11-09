@@ -1,122 +1,78 @@
+# built-in .bashrc had this. Checks that the prompt is interactive.
 [[ "$-" != *i* ]] && return
 
-alias whence='type -a'                        # where, of a sort
-alias ls='ls -hF --color=tty --group-directories-first'                 # classify files in colour
-alias ll='ls -lF --group-directories-first'                              # long list
-alias la='ls -AF --group-directories-first'                              # all but . and ..
-alias l='ls -C'                              #
-alias ~='cd ~'
+###############################################################
+##            Some preliminary environment setup.            ##
+###############################################################
 
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias gcl='git clone'
-alias gch='git checkout'
-alias gcm='git commit -m'
-alias gcam='git commit -am'
-alias gpush='git push origin'
-alias gpull='git pull origin'
-alias gs='git status'
-#alias s='git status --short'
-#alias d='git diff --color'
-alias dw='git diff --color --word-diff'
-alias push='git push'
-alias pull='git pull'
-alias sincetag='git shortlog `git describe --abbrev=0 --tags`..HEAD'
-cb() { git checkout $@ ;}
-cd() { builtin cd $@ && ls; }
+# Environment variables which can be useful
+export CSESVN=https://www-users.cselabs.umn.edu/svn/F12C3081
 
-# REALLY? A function to print an error? Yeah...
-_sderror() { echo "$1: Current directory has no version control!" ;}
-
-# Alias 's' and 'd' to git-diff or svn-diff based on current directory
-
-s() {
-    # suppress stderr
-    exec 2> /dev/null
-    if git rev-parse
-    then
-        # Current directory is a git repository
-        git status --short
-    elif [[ -d "$PWD"/.svn ]]
-    then
-        # Current directory is under svn control
-        svn status
-    else
-        _sderror $FUNCNAME
-    fi
-    # unsuppress stderr
-    exec 2> /dev/tty
-}
-
-d() {
-    # suppress stderr
-    exec 2> /dev/null
-    if git rev-parse
-    then
-        # Current directory is under git control
-        git diff --color
-    elif [[ -d "$PWD"/.svn ]]
-    then
-        # Current directory is under svn control
-        svn diff
-    else
-        _sderror $FUNCNAME
-    fi
-    # unsuppress stderr
-    exec 2> /dev/tty
-}
-
-# Wrap git-commit and svn-commit in commit command
-commit() {
-    # Suppress stderr
-    exec 2> /dev/null
-    if git rev-parse
-    then
-        # Current directory is under git control
-        exec 2> /dev/tty # Unsuppress stderr
-        git commit $@
-    elif [[ -d "$PWD"/.svn ]]
-    then
-        # Current directory is under svn control
-        exec 2> /dev/tty # Unsuppress stderr
-        svn commit $@
-    else
-        _sderror $FUNCNAME
-    fi
-    # Unsuppress stderr
-    exec 2> /dev/tty
-}
+# Stylize the bash prompt and set up 'ack' depending on the machine.
 
 ENDCOLOR='\[\033[0m\]'
 # On CSE labs machines, alias ack to standalone version of ack,
-# and make the prompt ]'d
+# and make the prompt red
 if [ "$(whoami)" == "wadst007" ]; then
     alias ack='~/bin/ack'
     RED='\[\033[1;31m\]'
     export PS1="\n${RED}\u@\h:\w\n\$ ${ENDCOLOR}"
 fi
-# On my personal machines, alias ack to ack-grep, and make the prompt green
+# On my personal (Linux) machines, alias ack to ack-grep,
+# and make the prompt green
 if [ "$(whoami)" == "mike" ]; then
     alias ack=ack-grep
     GREEN='\[\033[1;32m\]'
     export PS1="\n${GREEN}\u@\h:\w\n\$ ${ENDCOLOR}"
 fi
-# On my work computer, make the prompt cyan, set up some aliases
+# On my work computer, set up some appropriate aliases,
 if [ "$(whoami)" == "mwadsten" ]; then
     CYAN='\[\033[1;36m\]'
     export PS1="\n${CYAN}\u@\h:\w\n\$ ${ENDCOLOR}"
-    export FBOARDPATH=/cygdrive/c/HelloFreedom/
-    alias python='/cygdrive/c/Python/2_6/python'
-    alias cython='/usr/bin/python'
+    # Used to alias 'python' to Windows python. I don't like that anymore.
+    alias py='/cygdrive/c/Python/2_6/python'
+    #alias cython='/usr/bin/python'
 fi
 
+###############################################################
+##           Various aliases that make life easier.          ##
+###############################################################
+
+alias ls='ls -hF --color=tty --group-directories-first'
+alias ll='ls -lF --group-directories-first'
+alias la='ls -AF --group-directories-first'
+alias l='ls -C'
+alias ~='cd ~'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+# A rather uninteresting alias.
 alias copy=cp
 
+# I've gotten too used to these aliases to give them up.
+alias push='git push'
+alias pull='git pull'
+
+# Will most likely be moved to gitconfig aliases later on.
+alias dw='git diff --color --word-diff'
+alias sincetag='git shortlog `git describe --abbrev=0 --tags`..HEAD'
+
+###############################################################
+##           Custom functions that make life easier.         ##
+###############################################################
+
+cd() { builtin cd $@ && ls; }
+
+# These don't save much more typing that my git aliases do...
 log() { git log -$@ ;}
 slog() { git shortlog -$@ ;}
 
+# This is the same as 'cd -', isn't it?
 back() { cd $OLDPWD ;}
+
 # Uncompress depending on extension
 # copied from Josh Davis (github.com/jdavis/cs-dotfiles/.bashrc)
 extract() {
@@ -139,5 +95,3 @@ extract() {
         echo "'$1' is not a valid file"
     fi
 }
-
-export CSESVN=https://www-users.cselabs.umn.edu/svn/F12C3081

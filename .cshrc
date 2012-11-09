@@ -43,7 +43,7 @@ source /soft/rko-modules/tcl/init/tcsh
 #
 module load soft/gcc java perl gnu local compilers system x11
 module load openwin math/mathematica scheme user
-module load mozilla soft/openoffice
+module load mozilla
 
 #-----------------------------------------------------------------------------
 #   Shell variable customization...
@@ -70,6 +70,11 @@ if ($RANONCE == 0 && $?prompt) then
         exec $SHELL
     endif
 endif
+
+# soft/openoffice leads to 'git-[alias]' cannot be executed errors, because
+# of funny permissions problems. Putting this module-load call AFTER executing
+# bash seems to fix the problem.
+module load soft/openoffice
 
 if ($?prompt) then
   #
