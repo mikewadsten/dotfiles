@@ -189,9 +189,23 @@ Bundle 'Lokaltog/vim-powerline'
 " Conque shell only on actual unix (i.e. not cygwin)
 if has("unix") && !(has("win32unix"))
     Bundle 'lrvick/Conque-Shell'
+    " Lets you use GVim-like functionality without GVim
+    Bundle 'godlygeek/csapprox'
+
     nnoremap <leader>qq :ConqueTermVSplit bash<CR>
     let g:ConqueTerm_CloseOnEnd = 1
+    " Also add some fancier colors!
+    set t_Co=256
+    " Don't override window background, and get close to default coloring.
+    let g:CSApprox_hook_post = ['hi Normal ctermbg=NONE ctermfg=NONE',
+                              \ 'hi NonText ctermbg=NONE ctermfg=NONE',
+                              \ 'hi Identifier cterm=bold ctermfg=cyan',
+                              \ 'hi Constant cterm=bold',
+                              \ 'hi Comment cterm=bold',
+                              \ 'hi String cterm=bold ctermfg=magenta']
+    let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
 endif
+
 
 "
 " Plugin settings
