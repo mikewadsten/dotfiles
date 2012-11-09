@@ -186,14 +186,17 @@ Bundle 'vim-scripts/YankRing.vim'
 " Powerline, because why not
 Bundle 'Lokaltog/vim-powerline'
 
-" Conque shell only on actual unix (i.e. not cygwin)
-if has("unix") && !(has("win32unix"))
+" Conque shell only with python support
+if has("python")
     Bundle 'lrvick/Conque-Shell'
+    nnoremap <leader>qq :ConqueTermVSplit bash<CR>
+    let g:ConqueTerm_CloseOnEnd = 1
+endif
+" fake 256-colors on unix"
+if has("unix") && !has("win32unix")
     " Lets you use GVim-like functionality without GVim
     Bundle 'godlygeek/csapprox'
 
-    nnoremap <leader>qq :ConqueTermVSplit bash<CR>
-    let g:ConqueTerm_CloseOnEnd = 1
     " Also add some fancier colors!
     set t_Co=256
     " Don't override window background, and get close to default coloring.
