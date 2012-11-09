@@ -84,7 +84,6 @@ au ColorScheme * highlight ExtraWhitespace guibg=red
 au BufEnter * match ExtraWhitespace /\s\+$/
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhitespace /\s\+$/
-nnoremap <leader>qq :ConqueTermVSplit bash<CR>
 
 highlight cursorline cterm=NONE ctermbg=Black
 
@@ -187,6 +186,12 @@ Bundle 'vim-scripts/YankRing.vim'
 " Powerline, because why not
 Bundle 'Lokaltog/vim-powerline'
 
+" Conque shell only on actual unix (i.e. not cygwin)
+if has("unix") && !(has("win32unix"))
+    Bundle 'lrvick/Conque-Shell'
+    nnoremap <leader>qq :ConqueTermVSplit bash<CR>
+    let g:ConqueTerm_CloseOnEnd = 1
+endif
 
 "
 " Plugin settings
@@ -198,8 +203,6 @@ let g:flake8_ignore="E501,W802"
 " Autoclose Plugin options
 let g:AutoClosePairs = "() {} [] \" ' `"
 au FileType html,php,xhtml,xml,xrc let g:AutoClosePairs_del = "<>""'
-
-let g:ConqueTerm_CloseOnEnd = 1
 
 let g:Powerline_symbols = 'compatible'
 
