@@ -58,6 +58,10 @@ set colorcolumn=80
 " Auto save on focus lost.
 au FocusLost * :wa
 
+" Set line wrapping for .txt files
+au BufNewFile,BufRead *.txt set wrap
+au BufNewFile,BufRead *.txt set tw=79
+
 " map leader key to comma, because backslash sucks
 let mapleader = ","
 
