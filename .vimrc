@@ -2,6 +2,9 @@
 " Global Settings
 "
 
+" makes vim more useful
+set nocp
+
 " Need moar history
 set history=1000
 
@@ -33,9 +36,6 @@ set autoindent
 " persistent undo
 set undodir=~/.vim/undodir
 set undofile
-
-" makes vim more useful
-set nocp
 
 " more useful autocompletion
 set wildmode=list:longest
@@ -84,10 +84,10 @@ set encoding=utf-8
 "
 
 highlight ExtraWhitespace ctermbg=red
-au ColorScheme * highlight ExtraWhitespace guibg=red
-au BufEnter * match ExtraWhitespace /\s\+$/
-au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-au InsertLeave * match ExtraWhitespace /\s\+$/
+"au ColorScheme * highlight ExtraWhitespace guibg=red
+"au BufEnter * match ExtraWhitespace /\s\+$/
+"au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+"au InsertLeave * match ExtraWhitespace /\s\+$/
 
 highlight cursorline cterm=NONE ctermbg=Black
 
@@ -109,8 +109,8 @@ nnoremap <leader>d "_dd
 vnoremap <leader>d "_dd
 
 " map <leader>w to remove trailing whitespace across file
-nnoremap <leader>w :%s/\s\+$//e<CR>
-vnoremap <leader>w :%s/\s\+$//e<CR>
+nnoremap <leader>W :%s/\s\+$//e<CR>
+vnoremap <leader>W :%s/\s\+$//e<CR>
 
 " I use tabs now. Tabs are cool.
 nnoremap <silent> <leader>tt :tabnew<CR>
@@ -147,6 +147,9 @@ nnoremap ; :
 
 " Show yank-ring contents
 nnoremap <silent> <F9> :YRShow<CR>
+
+nnoremap <silent> <Leader>wn :match ExtraWhitespace /\s\+$/<CR>
+nnoremap <silent> <Leader>wf :match<CR>
 
 
 "
@@ -190,14 +193,17 @@ Bundle 'vim-scripts/YankRing.vim'
 " Powerline, because why not
 Bundle 'Lokaltog/vim-powerline'
 
-" Conque shell only on actual unix (i.e. not cygwin)
-if has("unix") && !(has("win32unix"))
+" Conque shell only with python support
+if has("python")
     Bundle 'lrvick/Conque-Shell'
+    nnoremap <leader>qq :ConqueTermVSplit bash<CR>
+    let g:ConqueTerm_CloseOnEnd = 1
+endif
+" fake 256-colors on unix"
+if has("unix") && !has("win32unix")
     " Lets you use GVim-like functionality without GVim
     Bundle 'godlygeek/csapprox'
 
-    nnoremap <leader>qq :ConqueTermVSplit bash<CR>
-    let g:ConqueTerm_CloseOnEnd = 1
     " Also add some fancier colors!
     set t_Co=256
     " Don't override window background, and get close to default coloring.
@@ -209,6 +215,13 @@ if has("unix") && !(has("win32unix"))
                               \ 'hi String cterm=bold ctermfg=magenta']
     let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
 endif
+
+" Git-related bundles
+
+" Vim-Git runtime files
+Bundle 'tpope/vim-git'
+" Vim + Git = awesome?
+Bundle 'tpope/vim-fugitive'
 
 
 "
@@ -223,6 +236,9 @@ let g:AutoClosePairs = "() {} [] \" ' `"
 au FileType html,php,xhtml,xml,xrc let g:AutoClosePairs_del = "<>""'
 
 let g:Powerline_symbols = 'compatible'
+
+" Powerline segment to indicate the presence of trailing whitespace
+call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
 " Load plugins and indent for the filetype
 filetype plugin indent on
