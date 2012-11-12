@@ -52,3 +52,4 @@ endif
 
 " Don't highlight whitespace in Makefiles
 autocmd FileType make set invlist
+autocmd Filetype conque_term set invlist  " same for conque term
