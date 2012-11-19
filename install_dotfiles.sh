@@ -29,30 +29,20 @@ git init
 echo
 echo "Adding remote origin..."
 git remote add origin https://github.com/mikewadsten/dotfiles
+git fetch
 
 echo
 echo  "Backing up old dotfiles..."
 mkdir dotfiles.old
 git ls-tree --name-only origin/master | xargs mv -t dotfiles.old/ > /dev/null 2>&1
-
-echo
-echo "Checking out remote branch..."
-git checkout -b master remotes/origin/master
-
-echo
-echo "Setting up submodules..."
-# Set up .vim (vim-files submodule)
-git submodule init
-git submodule update
-
-# Set up vundle
-builtin cd ~/.vim
-git submodule init
-git submodule update
-
 echo
 echo "Previous dotfiles can be found in dotfiles.old directory."
 
 echo
+echo "Checking out remote branch..."
+git checkout master
+
+echo
 echo "Installing spf13..."
-curl http://j.mo/spf13-vim3 -L -o - | sh
+rm .vimrc.fork .vimrc.bundles.fork -f
+curl http://j.mp/spf13-vim3 -L -o - | sh
