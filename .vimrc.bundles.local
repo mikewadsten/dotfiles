@@ -1,5 +1,9 @@
 " Specify only the plugin groups I want
-let g:spf13_bundle_groups=['general', 'neocomplcache', 'programming', 'php', 'python', 'html', 'misc']
+if has("python")
+    let g:spf13_bundle_groups=['general', 'neocomplcache', 'programming', 'php', 'python', 'html', 'misc']
+else
+    let g:spf13_bundle_groups=['general', 'neocomplcache', 'programming', 'php', 'html', 'misc']
+endif
 
 " Swap between header and source files easily.
 Bundle 'vim-scripts/a.vim'
