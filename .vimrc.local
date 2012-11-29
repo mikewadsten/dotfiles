@@ -52,4 +52,5 @@ endif
 
 " Don't highlight whitespace in Makefiles
 autocmd FileType make set invlist
-autocmd Filetype conque_term set invlist  " same for conque term
+autocmd FileType conque_term set invlist  " same for conque term
+autocmd FileType gitcommit set invlist  " and for commit messages

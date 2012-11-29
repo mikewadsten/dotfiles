@@ -1,6 +1,10 @@
 # built-in .bashrc had this. Checks that the prompt is interactive.
 [[ "$-" != *i* ]] && return
 
+# I have some Haskell packages and programs installed on my laptop.
+# They need their install location added to the PATH to work.
+[[ -d  ~/.cabal/bin ]] && export PATH=~/.cabal/bin:$PATH
+
 ###############################################################
 ##            Some preliminary environment setup.            ##
 ###############################################################
