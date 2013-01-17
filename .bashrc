@@ -11,6 +11,7 @@
 
 # Environment variables which can be useful
 export CSESVN=https://www-users.cselabs.umn.edu/svn/F12C3081
+export PYTHONSTARTUP=~/.pyrc
 
 # Stylize the bash prompt and set up 'ack' depending on the machine.
 
