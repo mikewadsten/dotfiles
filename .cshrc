@@ -53,6 +53,9 @@ module load mozilla
 #module load soft/gcc/3.4
 module load soft/sml
 
+# Latex woohoo
+module load tex/texlive
+
 setenv EDITOR vi
 setenv VISUAL vi
 # Do the magic to exec bash
