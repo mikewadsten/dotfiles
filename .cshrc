@@ -77,7 +77,7 @@ endif
 # soft/openoffice leads to 'git-[alias]' cannot be executed errors, because
 # of funny permissions problems. Putting this module-load call AFTER executing
 # bash seems to fix the problem.
-module load soft/openoffice
+#module load soft/openoffice
 
 if ($?prompt) then
   #
