@@ -5,6 +5,11 @@
 # They need their install location added to the PATH to work.
 [[ -d  ~/.cabal/bin ]] && export PATH=~/.cabal/bin:$PATH
 
+# Android SDK is installed at ~/android/sdk and ~/android/eclipse
+[[ -d ~/android/sdk/platform-tools ]] && export PATH=~/android/sdk/platform-tools:$PATH
+[[ -d ~/android/sdk/tools ]] && export PATH=~/android/sdk/tools:$PATH
+[[ -d ~/android/eclipse ]] && export PATH=~/android/eclipse:$PATH
+
 ###############################################################
 ##            Some preliminary environment setup.            ##
 ###############################################################
@@ -22,6 +27,7 @@ if [ "$(whoami)" == "wadst007" ]; then
     alias ack='~/bin/ack'
     RED='\[\033[1;31m\]'
     export PS1="\n${RED}\u@\h:\w\n\$ ${ENDCOLOR}"
+    alias sml='rlwrap sml'
 fi
 # On my personal (Linux) machines, alias ack to ack-grep,
 # and make the prompt green
@@ -29,6 +35,7 @@ if [ "$(whoami)" == "mike" ]; then
     alias ack=ack-grep
     GREEN='\[\033[1;32m\]'
     export PS1="\n${GREEN}\u@\h:\w\n\$ ${ENDCOLOR}"
+    alias sml='rlwrap sml'
 fi
 # On my work computer, set up some appropriate aliases,
 if [ "$(whoami)" == "mwadsten" ]; then
