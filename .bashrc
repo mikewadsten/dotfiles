@@ -79,7 +79,7 @@ alias sincetag='git shortlog `git describe --abbrev=0 --tags`..HEAD'
 cd() { builtin cd $@ && ls; }
 
 # These don't save much more typing that my git aliases do...
-log() { git log -$@ ;}
+log() { git log --decorate -$@ ;}
 slog() { git shortlog -$@ ;}
 
 # This is the same as 'cd -', isn't it?
