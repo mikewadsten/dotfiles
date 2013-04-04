@@ -2,6 +2,7 @@ set background=dark
 nnoremap ; :
 set listchars=tab:,\ ,trail:\ ,extends:#,nbsp:\  " Just highlight problematic whitespace, don't put punctuation in it too.
 set nocursorline  " I don't like the cursorline color now.
+"set scrolljump=0 " I don't like the jumpiness that much.
 
 " move between split windows with Alt-arrow
 nnoremap <silent> <A-Up> :wincmd k<CR>
@@ -46,3 +47,14 @@ noremap <leader>A :Ack<Space>
 
 " Powerline segment to indicate the presence of trailing whitespace
 call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
+
+" ConqueTerm mapping if we have python support and hence conque shell
+if has("python")
+    nnoremap <leader>qq :ConqueTermVSplit bash<CR>
+    let g:ConqueTerm_CloseOnEnd = 1
+endif
+
+" Don't highlight whitespace in Makefiles
+autocmd FileType make set invlist
+autocmd FileType conque_term set invlist  " same for conque term
+autocmd FileType gitcommit set invlist  " and for commit messages

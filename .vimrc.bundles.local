@@ -2,3 +2,19 @@
 let g:spf13_bundle_groups=['general', 'neocomplcache', 'programming', 'php', 'python', 'html', 'misc']
 
 Bundle 'airblade/vim-gitgutter'
+if has("python")
+    let g:spf13_bundle_groups=['general', 'neocomplcache', 'programming', 'php', 'python', 'html', 'misc']
+else
+    let g:spf13_bundle_groups=['general', 'neocomplcache', 'programming', 'php', 'html', 'misc']
+endif
+
+" Swap between header and source files easily.
+Bundle 'vim-scripts/a.vim'
+
+" Bundle conque term if python support
+if has("python")
+    Bundle 'lrvick/Conque-Shell'
+endif
+
+" Repeat actions with .
+Bundle 'tpope/vim-repeat'

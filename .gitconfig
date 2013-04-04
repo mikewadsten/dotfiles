@@ -23,7 +23,7 @@
     pl = pull
     re = reset
     rs = reset
-    rv = reverti
+    rv = revert
     s = status --short
     sl = shortlog
     st = status

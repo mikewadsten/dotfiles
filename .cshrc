@@ -53,6 +53,9 @@ module load mozilla
 #module load soft/gcc/3.4
 module load soft/sml
 
+# Latex woohoo
+module load tex/texlive
+
 setenv EDITOR vi
 setenv VISUAL vi
 # Do the magic to exec bash
@@ -74,7 +77,7 @@ endif
 # soft/openoffice leads to 'git-[alias]' cannot be executed errors, because
 # of funny permissions problems. Putting this module-load call AFTER executing
 # bash seems to fix the problem.
-module load soft/openoffice
+#module load soft/openoffice
 
 if ($?prompt) then
   #
