@@ -13,6 +13,10 @@ nnoremap <silent> <A-Right> :wincmd l<CR>
 " map <leader>d to delete to black hole register
 nnoremap <leader>d "_dd
 vnoremap <leader>d "_dd
+" seems to already happen, but eh
+" dump line to black hole, put clean line in its place
+nnoremap <leader>D "_ddO
+vnoremap <leader>D "_ddO
 
 " map <leader>w to remove trailing whitespace across file
 nnoremap <leader>W :%s/\s\+$//e<CR>
@@ -38,8 +42,13 @@ nnoremap <leader>vC :BundleClean!<CR>
 nnoremap <leader>/ :nohlsearch<CR>
 
 " Make up/down jump to next line in editor, not file
-nnoremap <Up> g<Up>
-nnoremap <Down> g<Down>
+"nnoremap <Up> g<Up>
+"nnoremap <Down> g<Down>
+" Time to try to learn hjkl instead of arrow keys
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
 
 " ack.vim
 noremap <leader>a :Ack <cword><CR>
