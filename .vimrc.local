@@ -1,13 +1,13 @@
 set background=dark
-nmap ; :
+nnoremap ; :
 set listchars=tab:,\ ,trail:\ ,extends:#,nbsp:\  " Just highlight problematic whitespace, don't put punctuation in it too.
 set nocursorline  " I don't like the cursorline color now.
 
 " move between split windows with Alt-arrow
-nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
+nnoremap <silent> <A-Up> :wincmd k<CR>
+nnoremap <silent> <A-Down> :wincmd j<CR>
+nnoremap <silent> <A-Left> :wincmd h<CR>
+nnoremap <silent> <A-Right> :wincmd l<CR>
 
 " map <leader>d to delete to black hole register
 nnoremap <leader>d "_dd
@@ -24,21 +24,21 @@ nnoremap <silent> <leader>tn :tabnext<CR>
 nnoremap <silent> <leader>tq :tabclose<CR>
 
 " Toggle NERDTree
-nmap <leader>b :NERDTreeTabsToggle<CR>
+nnoremap <leader>b :NERDTreeTabsToggle<CR>
 
 " Vundle mappings
-nmap <leader>vl :BundleList<CR>
-nmap <leader>vi :BundleInstall<CR>
-nmap <leader>vI :BundleInstall!<CR>
-nmap <leader>vc :BundleClean<CR>
-nmap <leader>vC :BundleClean!<CR>
+nnoremap <leader>vl :BundleList<CR>
+nnoremap <leader>vi :BundleInstall<CR>
+nnoremap <leader>vI :BundleInstall!<CR>
+nnoremap <leader>vc :BundleClean<CR>
+nnoremap <leader>vC :BundleClean!<CR>
 
 " Clear search highlighting
-nmap <leader>/ :nohlsearch<CR>
+nnoremap <leader>/ :nohlsearch<CR>
 
 " Make up/down jump to next line in editor, not file
-nmap <Up> g<Up>
-nmap <Down> g<Down>
+nnoremap <Up> g<Up>
+nnoremap <Down> g<Down>
 
 " ack.vim
 noremap <leader>a :Ack <cword><CR>
