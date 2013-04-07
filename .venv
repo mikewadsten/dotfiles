@@ -1,0 +1,91 @@
+# (c) 2013 Mike Wadsten. http://github.com/mikewadsten
+
+# Bash wrapper around Python virtualenv functionality.
+# Allow for easy activation of virtualenv with command 'venv'
+# (includes tab autocompletion!). Also includes the 'mkvenv'
+# command to easily create a new virtual environment within
+# the ENVS_DIR location specified, and 'rmvenv' to delete
+# virtual environments.
+
+ENVS_DIR=~/.envs
+
+# Handles autocompletion of virtual environment names
+_venv() {
+    local cur envs
+
+    cur=${COMP_WORDS[COMP_CWORD]}
+    envs=$(\ls ~/.envs)
+
+    COMPREPLY=( $( compgen -W "$envs" -- $cur ))
+
+    return 0
+}
+
+venv() {
+    local env
+    env=$1
+    envdir=$ENVS_DIR/$env
+    env_activate=$envdir/bin/activate
+
+    # Enter the Matrix
+    if [ -d $envdir ] ; then
+        if [ -f $env_activate ] ; then
+            source $env_activate
+        else
+            echo "Can't find activate script for virtual environment '$env'"
+        fi
+    else
+        echo "'$env' is not a virtual environment!"
+    fi
+}
+
+mkvenv() {
+    local dir
+    dir=$ENVS_DIR/$1
+
+    if [ -d $dir ]; then  # already exists
+        echo "There is already a virtual environment '$1'"
+        return 1
+    else
+        virtualenv $dir
+    fi
+}
+
+rmvenv() {
+    local dir
+    dir=$ENVS_DIR/$1
+
+    if [ -d $dir ]; then
+        # The virtual environment dir does exist
+        read -p "Are you sure you want to delete virtual environment '$1'? (y/n) " -n 1 -r
+        echo  # Newline for some spacing
+        echo  # Another one for good measure
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            # See if we are already inside the environment
+            case $PS1 in
+                "($1)"*)
+                    echo "Calling rmvenv on activate virtual environment! Deactivating..."
+                    deactivate
+                    # Presumably the virtual environment exists anyway...
+                    # Check we're not inside of it
+                    case "$(pwd)" in
+                        "$dir"* )
+                            echo "You're physically inside the environment right now! Leaving it..."
+                            builtin cd ~ ;;
+                        *) ;;
+                    esac ;;
+                *) ;;
+            esac
+
+            rm $dir -rf
+            echo "Deleted virtual environment '$1'"
+        else
+            echo "Never mind then!"
+        fi
+    else
+        echo "No virtual environment '$1'!"
+    fi
+}
+
+complete -F _venv -o nospace venv
+complete -F _venv -o nospace rmvenv

@@ -10,6 +10,9 @@
 [[ -d ~/android/sdk/tools ]] && export PATH=~/android/sdk/tools:$PATH
 [[ -d ~/android/eclipse ]] && export PATH=~/android/eclipse:$PATH
 
+# CSCI 5161
+[[ -d ~/compilers/scripts ]] && export PATH=~/compilers/scripts:$PATH
+
 ###############################################################
 ##            Some preliminary environment setup.            ##
 ###############################################################
@@ -107,3 +110,7 @@ extract() {
         echo "'$1' is not a valid file"
     fi
 }
+
+# My fun little wrapper to enter Python virtual environments
+# which I may have set up.
+source .venv
