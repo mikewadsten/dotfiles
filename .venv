@@ -24,19 +24,19 @@ _venv() {
 venv() {
     # Check argument count
     if [ "$#" == "0" ]; then
-        echo "usage: venv <environment name>"
+        echo "usage: $FUNCNAME <environment name>"
         return 1
     fi
 
-    local env
-    env=$1
+    local env envdir env_activate
+    env="$1"
     envdir=$ENVS_DIR/$env
     env_activate=$envdir/bin/activate
 
     # Enter the Matrix
-    if [ -d $envdir ] ; then
-        if [ -f $env_activate ] ; then
-            source $env_activate
+    if [ -d "$envdir" ] ; then
+        if [ -f "$env_activate" ] ; then
+            source "$env_activate"
         else
             echo "Can't find activate script for virtual environment '$env'"
         fi
@@ -48,32 +48,63 @@ venv() {
 mkenv() {
     # Check argument count
     if [ "$#" == "0" ]; then
-        echo "usage: mkenv <new environment name>"
+        echo "usage: $FUNCNAME <new environment name>"
         return 1
     fi
 
-    local dir
-    dir=$ENVS_DIR/$1
+    local dir env
+    env="$1"
+    dir=$ENVS_DIR/$env
 
-    if [ -d $dir ]; then  # already exists
+    # Environments starting with . interfere with my cunning plan to prevent deleting directories
+    # outside of $ENVS_DIR (or that directory itself) by stopping rmenv if the environment name
+    # given starts with .
+    case "$env" in
+        "."* )
+            echo "Please don't try to make environments starting with '.', I could get confused..."
+            return 1;;
+        *".."* )
+            echo "Please don't make environments containing '..', that's just weird!"
+            return 1;;
+        *"/"* )  # Doesn't mess with the filesystem, just might get weird...
+            echo "No slashes, please. ($1)"
+            return 1;;
+        *"\\"* )  # Doesn't mess with the filesystem, just might get weird...
+            echo "No slashes, please. ($1)"
+            return 1;;
+        *" "* )  # Would make it so you have to wrap arguments in quotes
+            echo "No spaces in environment name, please. ($1)"
+            return 1;;
+    esac
+
+    if [ -d "$dir" ]; then  # already exists
         echo "There is already a virtual environment '$1'"
         return 1
     else
-        virtualenv $dir
+        virtualenv "$dir"
     fi
 }
 
 rmenv() {
     # Check argument count
     if [ "$#" == "0" ]; then
-        echo "usage: rmenv <environment name>"
+        echo "usage: $FUNCNAME <environment name>"
         return 1
     fi
 
-    local dir
-    dir=$ENVS_DIR/$1
+    local dir env
+    env="$1"
+    dir=$ENVS_DIR/$env
 
-    if [ -d $dir ]; then
+    if [ -d "$dir" ]; then
+        case "$env" in
+            "."* )
+                echo "The given environment ($1) starts with . -- I don't like that."
+                return 1;;
+            *".."* )
+                echo "Looks like you're trying to mess with me ($1) -- son, just don't."
+                return 1;;
+        esac
         # The virtual environment dir does exist
         read -p "Are you sure you want to delete virtual environment '$1'? (y/n) " -n 1 -r
         echo  # Newline for some spacing
@@ -82,7 +113,7 @@ rmenv() {
             # See if we are already inside the environment
             case $PS1 in
                 "($1)"*)
-                    echo "Calling rmenv on active virtual environment! Deactivating..."
+                    echo "Calling $FUNCNAME on active virtual environment! Deactivating..."
                     deactivate
                     # Presumably the virtual environment exists anyway...
                     # Check we're not inside of it
@@ -95,7 +126,7 @@ rmenv() {
                 *) ;;
             esac
 
-            rm $dir -rf
+            rm "$dir" -rf
             echo "Deleted virtual environment '$1'"
         else
             echo "Never mind then!"
