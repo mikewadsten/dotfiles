@@ -2,9 +2,9 @@
 
 # Bash wrapper around Python virtualenv functionality.
 # Allow for easy activation of virtualenv with command 'venv'
-# (includes tab autocompletion!). Also includes the 'mkvenv'
+# (includes tab autocompletion!). Also includes the 'mkenv'
 # command to easily create a new virtual environment within
-# the ENVS_DIR location specified, and 'rmvenv' to delete
+# the ENVS_DIR location specified, and 'rmenv' to delete
 # virtual environments.
 
 ENVS_DIR=~/.envs
@@ -22,6 +22,12 @@ _venv() {
 }
 
 venv() {
+    # Check argument count
+    if [ "$#" == "0" ]; then
+        echo "usage: venv <environment name>"
+        return 1
+    fi
+
     local env
     env=$1
     envdir=$ENVS_DIR/$env
@@ -35,11 +41,17 @@ venv() {
             echo "Can't find activate script for virtual environment '$env'"
         fi
     else
-        echo "'$env' is not a virtual environment!"
+        echo "There is no virtual environment '$env'"
     fi
 }
 
-mkvenv() {
+mkenv() {
+    # Check argument count
+    if [ "$#" == "0" ]; then
+        echo "usage: mkenv <new environment name>"
+        return 1
+    fi
+
     local dir
     dir=$ENVS_DIR/$1
 
@@ -51,7 +63,13 @@ mkvenv() {
     fi
 }
 
-rmvenv() {
+rmenv() {
+    # Check argument count
+    if [ "$#" == "0" ]; then
+        echo "usage: rmenv <environment name>"
+        return 1
+    fi
+
     local dir
     dir=$ENVS_DIR/$1
 
@@ -64,7 +82,7 @@ rmvenv() {
             # See if we are already inside the environment
             case $PS1 in
                 "($1)"*)
-                    echo "Calling rmvenv on activate virtual environment! Deactivating..."
+                    echo "Calling rmenv on active virtual environment! Deactivating..."
                     deactivate
                     # Presumably the virtual environment exists anyway...
                     # Check we're not inside of it
@@ -83,9 +101,9 @@ rmvenv() {
             echo "Never mind then!"
         fi
     else
-        echo "No virtual environment '$1'!"
+        echo "There is no virtual environment '$1'"
     fi
 }
 
 complete -F _venv -o nospace venv
-complete -F _venv -o nospace rmvenv
+complete -F _venv -o nospace rmenv
