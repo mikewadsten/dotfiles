@@ -50,6 +50,12 @@ noremap <Down> <nop>
 noremap <Left> <nop>
 noremap <Right> <nop>
 
+" Thanks learn-vimscript-the-hard-way!
+imap <c-u> <esc>viwUi
+imap <c-l> <esc>viwui
+nmap <c-u> viwU
+nmap <c-l> viwu
+
 " ack.vim
 noremap <leader>a :Ack <cword><CR>
 noremap <leader>A :Ack<Space>
