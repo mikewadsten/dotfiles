@@ -14,7 +14,7 @@ _venv() {
     local cur envs
 
     cur=${COMP_WORDS[COMP_CWORD]}
-    envs=$(\ls ~/.envs)
+    envs=$(\ls $ENVS_DIR)
 
     COMPREPLY=( $( compgen -W "$envs" -- $cur ))
 

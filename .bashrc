@@ -113,4 +113,4 @@ extract() {
 
 # My fun little wrapper to enter Python virtual environments
 # which I may have set up.
-source .venv
+source ~/.venv
