@@ -18,7 +18,6 @@
 ###############################################################
 
 # Environment variables which can be useful
-export CSESVN=https://www-users.cselabs.umn.edu/svn/F12C3081
 export PYTHONSTARTUP=~/.pyrc
 
 # Stylize the bash prompt and set up 'ack' depending on the machine.
@@ -45,7 +44,8 @@ if [ "$(whoami)" == "mwadsten" ]; then
     CYAN='\[\033[1;36m\]'
     export PS1="\n${CYAN}\u@\h:\w\n\$ ${ENDCOLOR}"
     # Used to alias 'python' to Windows python. I don't like that anymore.
-    alias py='/cygdrive/c/Python/2_6/python'
+    # -i to get interactive prompt, -E to ignore PYTHON* environment variables
+    alias py='/cygdrive/c/Python/2_6/python -iE'
     #alias cython='/usr/bin/python'
 fi
 
@@ -114,3 +114,6 @@ extract() {
 # My fun little wrapper to enter Python virtual environments
 # which I may have set up.
 source .venv
+
+# don't put duplicate lines in history
+HISTCONTROL=ignoredups:ignorespace
