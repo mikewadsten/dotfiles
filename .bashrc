@@ -34,7 +34,7 @@ fi
 # On my personal (Linux) machines, alias ack to ack-grep,
 # and make the prompt green
 if [ "$(whoami)" == "mike" ]; then
-    alias ack=ack-grep
+    command -v ack >/dev/null 2>&1 || alias ack=ack-grep
     GREEN='\[\033[1;32m\]'
     export PS1="\n${GREEN}\u@\h:\w\n\$ ${ENDCOLOR}"
     alias sml='rlwrap sml'
