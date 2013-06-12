@@ -30,23 +30,29 @@ if [ "$(whoami)" == "wadst007" ]; then
     RED='\[\033[1;31m\]'
     export PS1="\n${RED}\u@\h:\w\n\$ ${ENDCOLOR}"
     alias sml='rlwrap sml'
-fi
 # On my personal (Linux) machines, alias ack to ack-grep,
 # and make the prompt green
-if [ "$(whoami)" == "mike" ]; then
+elif [ "$(whoami)" == "mike" ]; then
     command -v ack >/dev/null 2>&1 || alias ack=ack-grep
     GREEN='\[\033[1;32m\]'
     export PS1="\n${GREEN}\u@\h:\w\n\$ ${ENDCOLOR}"
     alias sml='rlwrap sml'
-fi
 # On my work computer, set up some appropriate aliases,
-if [ "$(whoami)" == "mwadsten" ]; then
+elif [ "$(whoami)" == "mwadsten" ]; then
     CYAN='\[\033[1;36m\]'
     export PS1="\n${CYAN}\u@\h:\w\n\$ ${ENDCOLOR}"
     # Used to alias 'python' to Windows python. I don't like that anymore.
     # -i to get interactive prompt, -E to ignore PYTHON* environment variables
     alias py='/cygdrive/c/Python/2_6/python -iE'
     #alias cython='/usr/bin/python'
+fi
+
+# If I'm running Arch (most likely a VM), there are some things
+# which must be fixed, chief among them being that many python-related
+# programs have '2' appended to their names. These are my workarounds.
+if [ $(uname -mrs | sed 's/.*-\(arch\).*/\L\1/i') =~ .*arch.* ]; then
+    alias virtualenv=virtualenv2
+    alias pip=pip2
 fi
 
 ###############################################################
