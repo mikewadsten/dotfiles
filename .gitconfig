@@ -40,3 +40,5 @@
 # Somehow necessary for https (or ssh?) connections
 [http]
     sslVerify = false
+[push]
+	default = matching
