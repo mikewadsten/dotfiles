@@ -50,7 +50,7 @@ fi
 # If I'm running Arch (most likely a VM), there are some things
 # which must be fixed, chief among them being that many python-related
 # programs have '2' appended to their names. These are my workarounds.
-if [ $(uname -mrs | sed 's/.*-\(arch\).*/\L\1/i') =~ .*arch.* ]; then
+if [ "$(uname -mrs | sed 's/.*-\(arch\).*/\L\1/i')" == "arch" ]; then
     alias virtualenv=virtualenv2
     alias pip=pip2
 fi
