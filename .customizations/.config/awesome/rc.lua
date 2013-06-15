@@ -11,6 +11,8 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
+local vicious = require("vicious")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -44,7 +46,10 @@ beautiful.init(awful.util.getdir("config") .. "/themes/awesome-solarized/dark/th
 -- This is used later as the default terminal and editor to run.
 terminal = "terminator"
 editor = os.getenv("EDITOR") or "vim"
-editor_cmd = terminal .. " -e " .. editor
+--editor_cmd = terminal .. " -e " .. editor
+function editor_cmd(file)
+    return terminal .. " -e \"" .. editor .. " " .. file .. "\""
+end
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -91,14 +96,15 @@ end
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
+   { "edit config", editor_cmd(awesome.conffile) },
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
 
+internet = "firefox"
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
+                                    { "internet", internet },
+                                    { "terminator", terminal }
                                   }
                         })
 
@@ -190,6 +196,12 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    local cpuwidget = wibox.widget.textbox()
+    vicious.register(cpuwidget, vicious.widgets.cpu, " cpu $1% ")
+    local memwidget = wibox.widget.textbox()
+    vicious.register(memwidget, vicious.widgets.mem, "mem $1% ($2MB) ", 2)
+    right_layout:add(cpuwidget)
+    right_layout:add(memwidget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -360,6 +372,11 @@ awful.rules.rules = {
 }
 -- }}}
 
+function add_tooltip(obj, tooltip)
+    local mtip = awful.tooltip({objects = {obj},})
+    mtip:set_text(tooltip)
+end
+
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
@@ -408,9 +425,9 @@ client.connect_signal("manage", function (c, startup)
         -- Widgets that are aligned to the right
         local right_layout = wibox.layout.fixed.horizontal()
         right_layout:add(awful.titlebar.widget.floatingbutton(c))
-        right_layout:add(awful.titlebar.widget.maximizedbutton(c))
         right_layout:add(awful.titlebar.widget.stickybutton(c))
         right_layout:add(awful.titlebar.widget.ontopbutton(c))
+        right_layout:add(awful.titlebar.widget.maximizedbutton(c))
         right_layout:add(awful.titlebar.widget.closebutton(c))
 
         -- The title goes in the middle
