@@ -89,7 +89,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[2])
 end
 -- }}}
 
@@ -197,9 +197,9 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     local cpuwidget = wibox.widget.textbox()
-    vicious.register(cpuwidget, vicious.widgets.cpu, " cpu $1% ")
+    vicious.register(cpuwidget, vicious.widgets.cpu, " cpu $1% .")
     local memwidget = wibox.widget.textbox()
-    vicious.register(memwidget, vicious.widgets.mem, "mem $1% ($2MB) ", 2)
+    vicious.register(memwidget, vicious.widgets.mem, " mem $1% ", 2)
     right_layout:add(cpuwidget)
     right_layout:add(memwidget)
     right_layout:add(mytextclock)
@@ -281,6 +281,28 @@ globalkeys = awful.util.table.join(
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
               end),
+
+    -- Fanciness courtesy of Andrew Wickert
+    awful.key({modkey,}, "`",
+            function()
+                awful.client.focus.byidx(1)
+                if client.focus then client.focus:raise() end
+            end),
+    awful.key({modkey, "Shift"}, "`",
+            function()
+                awful.client.focus.byidx(-1)
+                if client.focus then client.focus:raise() end
+            end),
+    awful.key({modkey,}, "Tab",
+            function()
+                awful.client.cycle(true)
+                awful.client.focus.byidx(-1)
+            end),
+    awful.key({modkey, "Shift"}, "Tab",
+            function()
+                awful.client.cycle(false)
+                awful.client.focus.byidx(1)
+            end),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end)
 )
@@ -371,11 +393,6 @@ awful.rules.rules = {
     --   properties = { tag = tags[1][2] } },
 }
 -- }}}
-
-function add_tooltip(obj, tooltip)
-    local mtip = awful.tooltip({objects = {obj},})
-    mtip:set_text(tooltip)
-end
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
