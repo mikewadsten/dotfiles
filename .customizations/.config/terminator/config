@@ -9,6 +9,7 @@
     cursor_shape = ibeam
     background_image = None
     foreground_color = "#ffffff"
+    show_titlebar = False
     font = Monaco 10
     background_color = "#0d2328"
     scrollback_infinite = True

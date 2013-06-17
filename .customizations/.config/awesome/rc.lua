@@ -117,7 +117,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock()
+mytextclock = awful.widget.textclock.new(" %a %b %d, %I:%M %p")
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -185,7 +185,7 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s })
+    mywibox[s] = awful.wibox({ position = "bottom", screen = s })
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -197,9 +197,9 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     local cpuwidget = wibox.widget.textbox()
-    vicious.register(cpuwidget, vicious.widgets.cpu, " cpu $1% .")
+    vicious.register(cpuwidget, vicious.widgets.cpu, " cpu $1% /")
     local memwidget = wibox.widget.textbox()
-    vicious.register(memwidget, vicious.widgets.mem, " mem $1% ", 2)
+    vicious.register(memwidget, vicious.widgets.mem, " mem $1% /", 2)
     right_layout:add(cpuwidget)
     right_layout:add(memwidget)
     right_layout:add(mytextclock)
@@ -450,6 +450,7 @@ client.connect_signal("manage", function (c, startup)
         -- The title goes in the middle
         local middle_layout = wibox.layout.flex.horizontal()
         local title = awful.titlebar.widget.titlewidget(c)
+        title:set_font("Monaco 10")
         title:set_align("center")
         middle_layout:add(title)
         middle_layout:buttons(buttons)
