@@ -123,3 +123,5 @@ source ~/.venv
 
 # don't put duplicate lines in history
 HISTCONTROL=ignoredups:ignorespace
+
+complete -cf sudo
