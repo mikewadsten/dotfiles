@@ -47,6 +47,9 @@ beautiful.init(awful.util.getdir("config") .. "/themes/awesome-solarized/dark/th
 terminal = "terminator"
 editor = os.getenv("EDITOR") or "vim"
 --editor_cmd = terminal .. " -e " .. editor
+function terminal_cmd(cmd)
+    return terminal .. " -e \"" .. cmd .. "\""
+end
 function editor_cmd(file)
     return terminal .. " -e \"" .. editor .. " " .. file .. "\""
 end
@@ -200,6 +203,10 @@ for s = 1, screen.count() do
     vicious.register(cpuwidget, vicious.widgets.cpu, " cpu $1% /")
     local memwidget = wibox.widget.textbox()
     vicious.register(memwidget, vicious.widgets.mem, " mem $1% /", 2)
+    cpuwidget:buttons(awful.util.table.join(
+        awful.button({}, 1, function() awful.util.spawn(terminal_cmd("top")) end)))
+    memwidget:buttons(awful.util.table.join(
+        awful.button({}, 1, function() awful.util.spawn(terminal_cmd("top")) end)))
     right_layout:add(cpuwidget)
     right_layout:add(memwidget)
     right_layout:add(mytextclock)
@@ -239,7 +246,7 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
+    --awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
