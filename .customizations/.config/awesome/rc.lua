@@ -104,8 +104,15 @@ myawesomemenu = {
    { "quit", awesome.quit }
 }
 
+system_menu = {
+    { "log out", awesome.quit },
+    { "reboot", "sudo reboot" },
+    { "shut down", "sudo poweroff"},
+}
+
 internet = "firefox"
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+                                    { "system", system_menu },
                                     { "internet", internet },
                                     { "terminator", terminal }
                                   }
