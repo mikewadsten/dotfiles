@@ -7,7 +7,10 @@
 
 # Android SDK is installed at ~/android/sdk and ~/android/eclipse
 [[ -d ~/android/sdk/platform-tools ]] && export PATH=~/android/sdk/platform-tools:$PATH
-[[ -d ~/android/sdk/tools ]] && export PATH=~/android/sdk/tools:$PATH
+if [ -d ~/android/sdk/tools ]; then
+    export PATH=~/android/sdk/tools:$PATH;
+    export ANDROID_HOME=~/android/sdk
+fi
 [[ -d ~/android/eclipse ]] && export PATH=~/android/eclipse:$PATH
 
 # CSCI 5161
