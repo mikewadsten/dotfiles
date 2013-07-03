@@ -1,0 +1,4 @@
+--ignore-dir=node_modules
+--type-set
+min:match:/[-._]min\.(css|js)$/
+--type=nomin
