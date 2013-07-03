@@ -16,6 +16,11 @@ fi
 # CSCI 5161
 [[ -d ~/compilers/scripts ]] && export PATH=~/compilers/scripts:$PATH
 
+# Heroku
+[[ -d /usr/local/heroku/bin ]] && export PATH=/usr/local/heroku/bin:$PATH
+
+[[ -d ~/.gem/ruby ]] && export PATH=$(ruby -rubygems -e "puts Gem.user_dir")/bin:$PATH
+
 ###############################################################
 ##            Some preliminary environment setup.            ##
 ###############################################################
@@ -128,3 +133,5 @@ source ~/.venv
 HISTCONTROL=ignoredups:ignorespace
 
 complete -cf sudo
+
+[[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh # This loads NVM
