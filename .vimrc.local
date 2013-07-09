@@ -9,14 +9,19 @@ nnoremap <silent> <A-Up> :wincmd k<CR>
 nnoremap <silent> <A-Down> :wincmd j<CR>
 nnoremap <silent> <A-Left> :wincmd h<CR>
 nnoremap <silent> <A-Right> :wincmd l<CR>
+" also with Ctrl-<hjkl key>
+nnoremap <silent> <C-h> <C-w>h
+nnoremap <silent> <C-j> <C-w>j
+nnoremap <silent> <C-k> <C-w>k
+nnoremap <silent> <C-l> <C-w>l
 
 " map <leader>d to delete to black hole register
 nnoremap <leader>d "_dd
 vnoremap <leader>d "_dd
 " seems to already happen, but eh
 " dump line to black hole, put clean line in its place
-nnoremap <leader>D "_ddO
-vnoremap <leader>D "_ddO
+nnoremap <leader>D "_ddO<Esc>
+nnoremap <leader><leader>d "_ddO<Esc>
 
 " map <leader>w to remove trailing whitespace across file
 nnoremap <leader>W :%s/\s\+$//e<CR>
@@ -40,6 +45,7 @@ nnoremap <leader>vC :BundleClean!<CR>
 
 " Clear search highlighting
 nnoremap <leader>/ :nohlsearch<CR>
+nnoremap <CR> :nohlsearch<CR>
 
 " Make up/down jump to next line in editor, not file
 "nnoremap <Up> g<Up>
@@ -52,13 +58,14 @@ noremap <Right> <nop>
 
 " Thanks learn-vimscript-the-hard-way!
 imap <c-u> <esc>viwUi
-imap <c-l> <esc>viwui
 nmap <c-u> viwU
-nmap <c-l> viwu
 
 " ack.vim
 noremap <leader>a :Ack <cword><CR>
 noremap <leader>A :Ack<Space>
+
+" J joins lines... K splits lines
+nnoremap K i<CR><Esc>
 
 " Powerline segment to indicate the presence of trailing whitespace
 call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
