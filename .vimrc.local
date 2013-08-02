@@ -3,6 +3,8 @@ nnoremap ; :
 set listchars=tab:,\ ,trail:\ ,extends:#,nbsp:\  " Just highlight problematic whitespace, don't put punctuation in it too.
 set nocursorline  " I don't like the cursorline color now.
 "set scrolljump=0 " I don't like the jumpiness that much.
+set colorcolumn=80
+set textwidth=79
 
 " move between split windows with Alt-arrow
 nnoremap <silent> <A-Up> :wincmd k<CR>
@@ -44,8 +46,8 @@ nnoremap <leader>vc :BundleClean<CR>
 nnoremap <leader>vC :BundleClean!<CR>
 
 " Clear search highlighting
-nnoremap <leader>/ :nohlsearch<CR>
-nnoremap <CR> :nohlsearch<CR>
+nnoremap <silent> <leader>/ :nohlsearch<CR>
+nnoremap <silent> <CR> :nohlsearch<CR>
 
 " Make up/down jump to next line in editor, not file
 "nnoremap <Up> g<Up>
@@ -80,3 +82,6 @@ endif
 autocmd FileType make set invlist
 autocmd FileType conque_term set invlist  " same for conque term
 autocmd FileType gitcommit set invlist  " and for commit messages
+
+autocmd FileType json nnoremap <silent> <leader>s :setlocal conceallevel=0<CR>
+let g:vim_json_syntax_conceal = 0
