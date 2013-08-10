@@ -1,4 +1,4 @@
-set background=dark
+
 nnoremap ; :
 set listchars=tab:,\ ,trail:\ ,extends:#,nbsp:\  " Just highlight problematic whitespace, don't put punctuation in it too.
 set nocursorline  " I don't like the cursorline color now.
@@ -85,3 +85,8 @@ autocmd FileType gitcommit set invlist  " and for commit messages
 
 autocmd FileType json nnoremap <silent> <leader>s :setlocal conceallevel=0<CR>
 let g:vim_json_syntax_conceal = 0
+
+" Make it easy to use emmet.io
+noremap <leader>z <End> :call emmet#expandAbbr(3, "")<CR>
+" Sometimes the Solarized theme freaks out?
+set bg=dark

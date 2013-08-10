@@ -17,3 +17,5 @@ endif
 
 " Repeat actions with .
 Bundle 'tpope/vim-repeat'
+
+Bundle 'mikewadsten/emmet-vim'
