@@ -84,9 +84,11 @@ autocmd FileType conque_term set invlist  " same for conque term
 autocmd FileType gitcommit set invlist  " and for commit messages
 
 autocmd FileType json nnoremap <silent> <leader>s :setlocal conceallevel=0<CR>
+autocmd FileType json setlocal conceallevel=0
 let g:vim_json_syntax_conceal = 0
 
 " Make it easy to use emmet.io
 noremap <leader>z <End> :call emmet#expandAbbr(3, "")<CR>
 " Sometimes the Solarized theme freaks out?
 set bg=dark
+let g:Powerline_symbols = 'fancy'

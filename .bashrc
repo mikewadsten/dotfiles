@@ -135,3 +135,17 @@ HISTCONTROL=ignoredups:ignorespace
 complete -cf sudo
 
 [[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh # This loads NVM
+
+sar() {
+    original=$1
+    replace=$2
+    expr="'s/$original/$replace/g'"
+    ack $original && (ack $original -l | xargs -p -n1 sed -i -e $expr)
+}
+
+POWERLINE_SHELL_FILE=~/.customizations/powerline-shell.py
+function _update_ps1() {
+    export PS1="$($POWERLINE_SHELL_FILE $?) "
+}
+
+[[ -f $POWERLINE_SHELL_FILE ]] && export PROMPT_COMMAND="_update_ps1 --mode=compatible"

@@ -13,6 +13,7 @@
     a = add
     br = branch
     ci = commit
+    ciam = commit --amend
     cl = clone
     co = checkout
     d = diff
@@ -41,4 +42,4 @@
 [http]
     sslVerify = false
 [push]
-	default = matching
+	default = tracking
