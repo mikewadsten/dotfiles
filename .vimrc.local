@@ -66,6 +66,9 @@ nmap <c-u> viwU
 noremap <leader>a :Ack <cword><CR>
 noremap <leader>A :Ack<Space>
 
+" grunt.vim
+noremap <C-g> :Grunt<Space>
+
 " J joins lines... K splits lines
 nnoremap K i<CR><Esc>
 

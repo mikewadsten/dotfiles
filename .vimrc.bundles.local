@@ -19,3 +19,7 @@ endif
 Bundle 'tpope/vim-repeat'
 
 Bundle 'mattn/emmet-vim'
+
+Bundle 'mklabs/grunt.vim'
+
+Bundle 'nvie/vim-flake8'
