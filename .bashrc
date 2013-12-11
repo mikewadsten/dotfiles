@@ -96,7 +96,7 @@ alias sincetag='git shortlog `git describe --abbrev=0 --tags`..HEAD'
 cd() { builtin cd $@ && ls; }
 
 # These don't save much more typing that my git aliases do...
-log() { git log --decorate -$@ ;}
+log() { if [ "$1" == "" ]; then set -- "${@:0}" 10 "${@:2:3:4:5}"; fi; git log --decorate -$@ ;}
 slog() { git shortlog -$@ ;}
 
 # This is the same as 'cd -', isn't it?
@@ -149,3 +149,15 @@ function _update_ps1() {
 }
 
 [[ -f $POWERLINE_SHELL_FILE ]] && export PROMPT_COMMAND="_update_ps1 --mode=compatible"
+
+# Convenient way to run a command in the background and redirect its outputs to
+# files. Example:
+bgmagic() {
+    if [ $# -le 2 ] ; then
+        echo "Usage: $FUNCNAME <output-file> <command-with-arguments>"
+        return 100
+    fi
+    OUTFILE=$1
+    shift
+    $@ 2> "$OUTFILE-error" > $OUTFILE &
+}
