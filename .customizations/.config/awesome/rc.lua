@@ -41,7 +41,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 -- beautiful.init("/usr/share/awesome/themes/default/theme.lua")
-beautiful.init(awful.util.getdir("config") .. "/themes/awesome-solarized/dark/theme.lua")
+beautiful.init(awful.util.getdir("config") .. "/themes/wmii-customized/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "terminator"
@@ -92,7 +92,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[2])
+    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[6])
 end
 -- }}}
 
@@ -114,7 +114,7 @@ internet = "firefox"
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "system", system_menu },
                                     { "internet", internet },
-                                    { "terminator", terminal }
+                                    { "terminal", terminal }
                                   }
                         })
 
@@ -207,9 +207,9 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     local cpuwidget = wibox.widget.textbox()
-    vicious.register(cpuwidget, vicious.widgets.cpu, " cpu $1% /")
+    vicious.register(cpuwidget, vicious.widgets.cpu, " cpu $1% .")
     local memwidget = wibox.widget.textbox()
-    vicious.register(memwidget, vicious.widgets.mem, " mem $1% /", 2)
+    vicious.register(memwidget, vicious.widgets.mem, " mem $1% .", 2)
     cpuwidget:buttons(awful.util.table.join(
         awful.button({}, 1, function() awful.util.spawn(terminal_cmd("top")) end)))
     memwidget:buttons(awful.util.table.join(
