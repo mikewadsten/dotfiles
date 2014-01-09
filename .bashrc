@@ -60,7 +60,26 @@ fi
 # programs have '2' appended to their names. These are my workarounds.
 if [ "$(uname -mrs | sed 's/.*-\(arch\).*/\L\1/i')" == "arch" ]; then
     alias virtualenv=virtualenv2
-    alias pip=pip2
+    #alias pip=pip2
+
+    # This is essentially doing a conditional alias of `pip`, to ensure that,
+    # if running in a virtual environment, the `pip` executable for the
+    # virtualenv is used; and if outside a virtual environment, the global pip
+    # install (if installed as pip2) is used; or else, an error message is
+    # displayed.
+    pip() {
+        if [ "$VIRTUAL_ENV" == "" ]; then
+            # Not inside virtualenv environment - need to run pip2 if possible
+            if [ command -v pip2 > /dev/null 2>&1 ]; then
+                command pip2 $@
+            else
+                echo -e "\e[0;31mpip was not found. Did you mean to enter a virtual environment first?\e[0m"
+                return 100
+            fi
+        else
+            command pip $@
+        fi
+    }
 fi
 
 ###############################################################
@@ -122,6 +141,7 @@ extract() {
         esac
     else
         echo "'$1' is not a valid file"
+        return 100
     fi
 }
 
@@ -145,10 +165,10 @@ sar() {
 
 POWERLINE_SHELL_FILE=~/.customizations/powerline-shell.py
 function _update_ps1() {
-    export PS1="$($POWERLINE_SHELL_FILE $?) "
+    export PS1="$($POWERLINE_SHELL_FILE --mode=compatible) "
 }
 
-[[ -f $POWERLINE_SHELL_FILE ]] && export PROMPT_COMMAND="_update_ps1 --mode=compatible"
+[[ -f $POWERLINE_SHELL_FILE ]] && export PROMPT_COMMAND="_update_ps1"
 
 # Convenient way to run a command in the background and redirect its outputs to
 # files. Example:
