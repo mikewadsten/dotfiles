@@ -165,7 +165,7 @@ sar() {
 
 POWERLINE_SHELL_FILE=~/.customizations/powerline-shell.py
 function _update_ps1() {
-    export PS1="$($POWERLINE_SHELL_FILE --mode=patched) "
+    export PS1="$($POWERLINE_SHELL_FILE --mode=patched $?) "
 }
 
 [[ -f $POWERLINE_SHELL_FILE ]] && export PROMPT_COMMAND="_update_ps1"
