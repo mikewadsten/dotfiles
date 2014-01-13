@@ -168,7 +168,9 @@ function _update_ps1() {
     export PS1="$($POWERLINE_SHELL_FILE --mode=patched $?) "
 }
 
-[[ -f $POWERLINE_SHELL_FILE ]] && export PROMPT_COMMAND="_update_ps1"
+if [ x$DISPLAY != x ]; then
+    [[ -f $POWERLINE_SHELL_FILE ]] && export PROMPT_COMMAND="_update_ps1"
+fi
 
 # Convenient way to run a command in the background and redirect its outputs to
 # files. Example:
