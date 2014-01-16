@@ -59,7 +59,7 @@ fi
 # which must be fixed, chief among them being that many python-related
 # programs have '2' appended to their names. These are my workarounds.
 if [ "$(uname -mrs | sed 's/.*-\(arch\).*/\L\1/i')" == "arch" ]; then
-    alias virtualenv=virtualenv2
+    command -v virtualenv >/dev/null 2>&1 || alias virtualenv=virtualenv2
     #alias pip=pip2
 
     # This is essentially doing a conditional alias of `pip`, to ensure that,
@@ -183,3 +183,6 @@ bgmagic() {
     shift
     $@ 2> "$OUTFILE-error" > $OUTFILE &
 }
+
+# Remove .pyc files easily
+alias rmpyc="find . -name '*.pyc' | xargs rm"
