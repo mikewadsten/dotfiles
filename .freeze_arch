@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Add a crontab entry like so:  0 8-20 * * 1-5 /home/mike/.freeze_arch
+# That will run this script every hour on the hour, between 8am and 8pm,
+# on weekdays.
+
+pacman -Q | awk '{print $1}' > /home/mike/.archfreeze
