@@ -1,8 +1,10 @@
+abs
 acl
 archlinux-keyring
 aspell
 atk
 attr
+autoconf
 avahi
 awesome
 bash
@@ -35,6 +37,7 @@ e2fsprogs
 elfutils
 enchant
 expat
+fakeroot
 file
 filesystem
 findutils
@@ -166,6 +169,7 @@ libxss
 libxt
 libxv
 libxxf86vm
+libyaml
 licenses
 linux
 linux-api-headers
@@ -177,6 +181,7 @@ lua-lgi
 lvm2
 lxappearance
 lzo2
+m4
 make
 man-db
 man-pages
@@ -229,6 +234,8 @@ randrproto
 readline
 reiserfsprogs
 renderproto
+rsync
+ruby
 run-parts
 s-nail
 scrnsaverproto
