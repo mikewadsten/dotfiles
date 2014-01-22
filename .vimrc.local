@@ -73,7 +73,7 @@ noremap <C-g> :Grunt<Space>
 nnoremap K i<CR><Esc>
 
 " Powerline segment to indicate the presence of trailing whitespace
-call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
+"call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
 " ConqueTerm mapping if we have python support and hence conque shell
 if has("python")
@@ -94,4 +94,27 @@ let g:vim_json_syntax_conceal = 0
 noremap <leader>z <End> :call emmet#expandAbbr(3, "")<CR>
 " Sometimes the Solarized theme freaks out?
 set bg=dark
-let g:Powerline_symbols = 'fancy'
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
+
+let g:pymode_rope_autoimport_import_after_complete = 1
+let g:pymode_rope_regenerate_on_write = 1
+let g:pymode_lint = 0
+
+" Fold settings
+
+" I've had it with these monkey-fighting folds in this Monday-to-Friday buffer!
+set nofoldenable
+
+let g:pymode_debug = 1
+let g:pymode_breakpoint_bind = '<leader>B'
