@@ -4,7 +4,9 @@
 let g:spf13_bundle_groups=['general', 'neocomplcache', 'javascript', 'programming', 'php', 'html', 'misc']
 
 " Copy of what spf13 installs when 'python' is specified
-Bundle 'mikewadsten/python-mode' " my fork of klen/python-mode
+" my fork of klen/python-mode
+UnBundle 'klen/python-mode'
+Bundle 'mikewadsten/python-mode'
 Bundle 'python.vim'
 Bundle 'python_match.vim'
 Bundle 'pythoncomplete'
