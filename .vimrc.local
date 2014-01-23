@@ -36,7 +36,7 @@ nnoremap <silent> <leader>tn :tabnext<CR>
 nnoremap <silent> <leader>tq :tabclose<CR>
 
 " Toggle NERDTree
-nnoremap <leader>b :NERDTreeTabsToggle<CR>
+nmap <leader>b :NERDTreeTabsToggle<CR>
 
 " Vundle mappings
 nnoremap <leader>vl :BundleList<CR>
@@ -108,7 +108,7 @@ let g:airline_symbols.readonly = '⭤'
 let g:airline_symbols.linenr = '⭡'
 
 let g:pymode_rope_autoimport_import_after_complete = 1
-let g:pymode_rope_regenerate_on_write = 1
+let g:pymode_rope_regenerate_on_write = 0
 let g:pymode_lint = 0
 
 " Fold settings
@@ -118,3 +118,6 @@ set nofoldenable
 
 let g:pymode_debug = 1
 let g:pymode_breakpoint_bind = '<leader>B'
+let g:pymode_no_change_on_autoimport = 1
+
+nnoremap <leader>rp :PymodeRopeRegenProject<CR>

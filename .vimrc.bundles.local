@@ -1,11 +1,13 @@
 "Bundle 'airblade/vim-gitgutter'
 
 " Specify only the plugin groups I want
-if has("python")
-    let g:spf13_bundle_groups=['general', 'neocomplcache', 'javascript', 'programming', 'php', 'python', 'html', 'misc']
-else
-    let g:spf13_bundle_groups=['general', 'neocomplcache', 'javascript', 'programming', 'php', 'html', 'misc']
-endif
+let g:spf13_bundle_groups=['general', 'neocomplcache', 'javascript', 'programming', 'php', 'html', 'misc']
+
+" Copy of what spf13 installs when 'python' is specified
+Bundle 'mikewadsten/python-mode' " my fork of klen/python-mode
+Bundle 'python.vim'
+Bundle 'python_match.vim'
+Bundle 'pythoncomplete'
 
 " Swap between header and source files easily.
 Bundle 'vim-scripts/a.vim'
