@@ -115,7 +115,7 @@ alias sincetag='git shortlog `git describe --abbrev=0 --tags`..HEAD'
 cd() { builtin cd $@ && ls; }
 
 # These don't save much more typing that my git aliases do...
-log() { if [ "$1" == "" ]; then set -- "${@:0}" 10 "${@:2:3:4:5}"; fi; git log --decorate -$@ ;}
+log() { if [ "$1" == "" ]; then set -- "${@:0}" 10 "${@:2:3:4:5}"; fi; git ls -$@ ;}
 slog() { git shortlog -$@ ;}
 
 # This is the same as 'cd -', isn't it?
@@ -186,3 +186,4 @@ bgmagic() {
 
 # Remove .pyc files easily
 alias rmpyc="find . -name '*.pyc' | xargs rm"
+export EDITOR=vim

@@ -20,6 +20,8 @@
     dc = diff --cached # Include staged files
     h = help
     l = log
+    ls = log --oneline --format='%C(green bold)%h%Creset %C(yellow bold)[%ar]%Creset %C(red bold)%d%Creset %s %C(blue bold)<%an>%Creset'
+    ;ls = log --oneline --format='%Cred%h%Creset %Cyellow[%ar]%C(reset) %C(blue ul)%an%C(reset)%x09 - %s'
     pu = push
     pl = pull
     re = reset
