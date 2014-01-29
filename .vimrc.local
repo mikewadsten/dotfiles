@@ -116,7 +116,7 @@ let g:pymode_lint = 0
 " I've had it with these monkey-fighting folds in this Monday-to-Friday buffer!
 set nofoldenable
 
-let g:pymode_debug = 1
+"let g:pymode_debug = 1
 let g:pymode_breakpoint_bind = '<leader>B'
 let g:pymode_no_change_on_autoimport = 1
 
