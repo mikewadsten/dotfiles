@@ -136,5 +136,10 @@ rmenv() {
     fi
 }
 
+activate() {
+    venv $@
+}
+
 complete -F _venv -o nospace venv
 complete -F _venv -o nospace rmenv
+complete -F _venv -o nospace activate
