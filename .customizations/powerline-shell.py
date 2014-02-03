@@ -461,7 +461,7 @@ add_root_indicator_segment()
 if "fish" in os.environ["SHELL"]:
     # Add an indicator that I'm running in fish, not bash.
     powerline.segments.insert(0,
-        ('fish ', Color.JOBS_FG, Color.JOBS_BG,
+        (' fish ', Color.JOBS_FG, Color.JOBS_BG,
          powerline.separator, Color.JOBS_BG))
 
 sys.stdout.write(powerline.draw())
