@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
 import argparse
@@ -17,7 +17,7 @@ class Powerline:
             'separator_thin': u'\u276F'
         },
         'patched': {
-            'lock': u'\uE0A2',
+            'lock': u'RO',
             'network': u'\uE0A2',
             'separator': u'\u2B80',
             'separator_thin': u'\u2B81'
