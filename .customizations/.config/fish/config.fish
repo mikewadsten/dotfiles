@@ -22,4 +22,5 @@ end
 
 function fish_prompt
     ~/.customizations/powerline-shell.py $status --shell bare ^/dev/null
+    echo -e " "
 end
