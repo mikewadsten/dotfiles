@@ -23,8 +23,8 @@ class Powerline:
             'separator_thin': u'\u2B81'
         },
         'flat': {
-            'lock': '',
-            'network': '',
+            'lock': 'RO',
+            'network': 'SSH',
             'separator': '',
             'separator_thin': ''
         },
@@ -40,6 +40,9 @@ class Powerline:
         self.args = args
         self.cwd = cwd
         mode, shell = args.mode, args.shell
+        if os.getenv('SSH_CLIENT'):
+            # Force flat mode over SSH
+            mode = 'flat'
         self.color_template = self.color_templates[shell]
         self.reset = self.color_template % '[0m'
         self.lock = Powerline.symbols[mode]['lock']

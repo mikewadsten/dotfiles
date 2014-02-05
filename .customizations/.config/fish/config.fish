@@ -28,3 +28,7 @@ end
 set -x SHELL (which fish)
 
 set fish_greeting
+
+set VIRTUAL_ENV_DISABLE_PROMPT 1
+
+set -x PYTHONSTARTUP ~/.pyrc
