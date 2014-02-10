@@ -5,8 +5,11 @@
     email = mikewadsten@gmail.com
 [core]
     editor = vim
+    excludesfile = ~/.git_excludes
 [help]
     autocorrect = 1
+[init]
+    templatedir = ~/.git_template
 [github]
     user = mikewadsten
 [alias] # Some stolen from Josh Davis
@@ -35,6 +38,16 @@
     st = status
     un = reset HEAD
     unstage = reset HEAD
+
+    # New commands
+    # As specified by Josh Davis (https://github.com/jdavis/dotfiles)
+    amend = commit --amend
+    ctags = !.git/hooks/ctags
+    untrack = update-index --assume-unchanged
+    track = update-index --no-assume-unchanged
+
+    # Show Git repository root
+    root = rev-parse --show-toplevel
 [color]
     ui = true
     [color "diff"]
