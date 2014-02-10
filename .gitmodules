@@ -1,1 +1,4 @@
 # Nothing to see here.
+[submodule "vim-renaissance"]
+	path = vim-renaissance
+	url = https://github.com/mikewadsten/vim-renaissance
