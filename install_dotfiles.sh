@@ -43,6 +43,12 @@ echo "Checking out remote branch..."
 git checkout master
 
 echo
-echo "Installing spf13..."
-rm .vimrc.fork .vimrc.bundles.fork -f
-curl http://j.mp/spf13-vim3 -L -o - | sh
+echo "Adding submodules..."
+git submodule init
+git submodule update
+
+echo
+echo "Bootstrapping vim-renaissance"
+bash vim-renaissance/bootstrap.sh
+
+echo "All done!"
