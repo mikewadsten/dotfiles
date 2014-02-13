@@ -35,4 +35,4 @@ set -x PYTHONSTARTUP ~/.pyrc
 
 set -x VIRTUALFISH_HOME ~/.envs
 . ~/.config/fish/virtual.fish
-. ~/.config/fish/vf_auto_activate.fish
+#. ~/.config/fish/vf_auto_activate.fish
