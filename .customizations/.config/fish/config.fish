@@ -32,3 +32,7 @@ set fish_greeting
 set VIRTUAL_ENV_DISABLE_PROMPT 1
 
 set -x PYTHONSTARTUP ~/.pyrc
+
+set -x VIRTUALFISH_HOME ~/.envs
+. ~/.config/fish/virtual.fish
+. ~/.config/fish/vf_auto_activate.fish
