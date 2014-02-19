@@ -11,7 +11,7 @@
     background_image = None
     foreground_color = "#ffffff"
     show_titlebar = False
-    font = Inconsolata for Powerline Medium 12
+    font = Monaco for Powerline 9
     background_color = "#0d2328"
     scrollback_infinite = True
 [layouts]
