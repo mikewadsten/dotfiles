@@ -37,3 +37,7 @@ export PATH=/usr/local/heroku/bin:$PATH
 export PATH=$HOME/.gem/ruby/2.0.0/bin:$PATH
 
 export LESS=-RFX
+
+cd() { builtin cd $@ && ls ;}
+
+export SHELL=$(which zsh)
