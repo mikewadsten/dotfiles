@@ -6,7 +6,7 @@ setopt appendhistory autocd extendedglob nomatch
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/mike/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
 compinit
@@ -15,7 +15,14 @@ compinit
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="agnoster"
 
+WORKON_HOME=$HOME/.envs
+
+plugins=(git virtualenv python virtualenvwrapper)
+
 source $ZSH/oh-my-zsh.sh
+
+export PATH=/usr/local/share/python:$PATH
+export PATH=/usr/local/opt/coreutils/libexec/gnubin:$HOME/bin:/usr/local/bin:$PATH
 
 function powerline_precmd() {
     export PS1="$(~/.customizations/powerline-shell.py --mode=patched --shell zsh $? 2>/dev/null) "
@@ -33,10 +40,15 @@ if [ x$DISPLAY != x ]; then
     install_powerline_precmd
 fi
 
-export PATH=/usr/local/heroku/bin:$PATH
-export PATH=$HOME/.gem/ruby/2.0.0/bin:$PATH
+[[ -d /usr/local/heroku/bin ]] && export PATH=/usr/local/heroku/bin:$PATH
+[[ -d $HOME/.gem/ruby/2.0.0/bin ]] && export PATH=$HOME/.gem/ruby/2.0.0/bin:$PATH
 
 export LESS=-RFX
+
+alias ls='ls -hF --color=tty --group-directories-first'
+alias ll='ls -lF --group-directories-first'
+alias la='ls -AF --group-directories-first'
+alias ~-'cd ~'
 
 cd() { builtin cd $@ && ls ;}
 
