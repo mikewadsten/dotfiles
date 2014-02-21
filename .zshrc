@@ -17,7 +17,23 @@ ZSH_THEME="agnoster"
 
 WORKON_HOME=$HOME/.envs
 
-plugins=(git virtualenv python virtualenvwrapper)
+# Plugins
+plugins=()
+
+plugins+=(git)
+
+# Python-related plugins
+plugins+=(python pip virtualenv virtualenvwrapper)
+# Node-related plugins
+plugins+=(node npm coffee)
+
+plugins+=(autojump)
+
+UNAME=`uname`
+
+if [[ $UNAME == 'Darwin' ]]; then
+    plugins+=(osx brew gem)
+fi
 
 source $ZSH/oh-my-zsh.sh
 
