@@ -69,3 +69,5 @@ alias ~-'cd ~'
 cd() { builtin cd $@ && ls ;}
 
 export SHELL=$(which zsh)
+
+export PYTHONSTARTUP=$HOME/.pyrc
