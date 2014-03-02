@@ -35,6 +35,8 @@ if [[ $UNAME == 'Darwin' ]]; then
     plugins+=(osx brew gem)
 fi
 
+command -v github >/dev/null 2>&1 && plugins+=(github)
+
 source $ZSH/oh-my-zsh.sh
 
 export PATH=/usr/local/share/python:$PATH
@@ -69,3 +71,5 @@ alias ~-'cd ~'
 cd() { builtin cd $@ && ls ;}
 
 export SHELL=$(which zsh)
+
+export PYTHONSTARTUP=$HOME/.pyrc
