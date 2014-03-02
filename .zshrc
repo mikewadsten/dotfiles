@@ -73,3 +73,6 @@ cd() { builtin cd $@ && ls ;}
 export SHELL=$(which zsh)
 
 export PYTHONSTARTUP=$HOME/.pyrc
+
+# shucks config file
+[[ -f $HOME/.shucks ]] && export SHUCKS=$HOME/.shucks
