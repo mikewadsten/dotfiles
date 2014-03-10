@@ -185,5 +185,16 @@ bgmagic() {
 }
 
 # Remove .pyc files easily
-alias rmpyc="find . -name '*.pyc' | xargs rm"
+rmpyc() {
+    if [ "$1" == "" ] ; then
+        DIR="."
+    else
+        DIR=$1
+    fi
+
+    find $DIR -name '*.pyc' | xargs rm -f
+}
+
 export EDITOR=vim
+
+alias tidyxml="tidy -i -xml"
