@@ -1,3 +1,27 @@
+# Check for tmux existence
+command -v tmux &> /dev/null
+
+if [[ ( -z $TMUX ) && ( $? -eq 0 ) ]]; then
+    # No TMUX session yet -- decide which session to launch into.
+    tmuxsess="remote"
+
+    if [[  ( -z $SSH_TTY ) && ( -z $SSH_CLIENT ) ]]; then
+        # Not running over SSH -- use local session instead!
+        tmuxsess="local"
+    fi
+
+    echo "Using tmux session $tmuxsess"
+
+    tmux has-session -t $tmuxsess &> /dev/null
+    if [ $? -eq 0 ]; then
+        echo "Attaching to session..."
+        exec tmux attach-session -t $tmuxsess
+    else
+        echo "Creating session..."
+        exec tmux new-session -s $tmuxsess
+    fi
+fi
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
