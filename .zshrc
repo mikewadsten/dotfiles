@@ -38,7 +38,7 @@ compinit
 
 ZSH=$HOME/.oh-my-zsh
 #ZSH_THEME="agnoster"
-ZSH_THEME="steeef"
+ZSH_THEME="mikewadsten"
 
 WORKON_HOME=$HOME/.envs
 

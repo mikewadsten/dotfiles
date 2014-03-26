@@ -2,3 +2,6 @@
 [submodule "vim-renaissance"]
 	path = vim-renaissance
 	url = https://github.com/mikewadsten/vim-renaissance
+[submodule ".oh-my-zsh"]
+	path = .oh-my-zsh
+	url = https://github.com/mikewadsten/oh-my-zsh
