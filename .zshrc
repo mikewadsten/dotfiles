@@ -42,6 +42,10 @@ ZSH_THEME="mikewadsten"
 
 WORKON_HOME=$HOME/.envs
 
+VIRTUALENVWRAPPER_PYTHON=$(which python2.7)
+# Override on Mac with Homebrew-ed python
+[[ -f /usr/local/bin/python ]] && export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+
 # Plugins
 plugins=()
 
@@ -62,7 +66,8 @@ fi
 
 command -v github >/dev/null 2>&1 && plugins+=(github)
 
-VIRTUALENVWRAPPER_PYTHON=$(which python2.7)
+# MUST BE LAST
+plugins+=(zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
