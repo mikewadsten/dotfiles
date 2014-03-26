@@ -61,6 +61,8 @@ fi
 
 command -v github >/dev/null 2>&1 && plugins+=(github)
 
+VIRTUALENVWRAPPER_PYTHON=$(which python2.7)
+
 source $ZSH/oh-my-zsh.sh
 
 export PATH=/usr/local/share/python:$PATH
