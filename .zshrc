@@ -37,7 +37,8 @@ compinit
 # End of lines added by compinstall
 
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="agnoster"
+#ZSH_THEME="agnoster"
+ZSH_THEME="steeef"
 
 WORKON_HOME=$HOME/.envs
 
@@ -74,16 +75,19 @@ function powerline_precmd() {
 if [ x$DISPLAY != x ]; then
     # Enable xterm transparency. Check for transset-df first, though.
     [ -n "$XTERM_VERSION" ] && command -v transset-df >&/dev/null && transset-df -a 0.7 >/dev/null
-    function install_powerline_precmd() {
-        for s in "${precmd_functions[@]}"; do
-            if [ "$s" = "powerline_precmd" ]; then
-                return
-            fi
-        done
-        precmd_functions+=(powerline_precmd)
-    }
 
-    install_powerline_precmd
+    if [[ "$ZSH_THEME" == "agnoster" ]]; then
+        function install_powerline_precmd() {
+            for s in "${precmd_functions[@]}"; do
+                if [ "$s" = "powerline_precmd" ]; then
+                    return
+                fi
+            done
+            precmd_functions+=(powerline_precmd)
+        }
+
+        install_powerline_precmd
+    fi
 fi
 
 [[ -d /usr/local/heroku/bin ]] && export PATH=/usr/local/heroku/bin:$PATH
