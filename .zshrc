@@ -72,6 +72,8 @@ function powerline_precmd() {
     export PS1="$(~/.customizations/powerline-shell.py --mode=patched --shell zsh $? 2>/dev/null) "
 }
 if [ x$DISPLAY != x ]; then
+    # Enable xterm transparency. Check for transset-df first, though.
+    [ -n "$XTERM_VERSION" ] && command -v transset-df >&/dev/null && transset-df -a 0.7 >/dev/null
     function install_powerline_precmd() {
         for s in "${precmd_functions[@]}"; do
             if [ "$s" = "powerline_precmd" ]; then
