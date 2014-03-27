@@ -1,7 +1,9 @@
 # Check for tmux existence
 command -v tmux &> /dev/null
 
-if [[ ( -z $TMUX ) && ( $? -eq 0 ) ]]; then
+NO_AUTO_TMUX=1
+
+if [[ ( -z $TMUX ) && ( -z $NO_AUTO_TMUX ) && ( $? -eq 0 ) ]]; then
     # No TMUX session yet -- decide which session to launch into.
     tmuxsess="remote"
 
@@ -56,7 +58,8 @@ plugins+=(python pip virtualenv virtualenvwrapper)
 # Node-related plugins
 plugins+=(node npm coffee)
 
-plugins+=(autojump)
+# Autojump is broken for me sometimes :(
+#plugins+=(autojump)
 
 UNAME=`uname`
 
@@ -75,7 +78,13 @@ export PATH=/usr/local/share/python:$PATH
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$HOME/bin:/usr/local/bin:$PATH
 
 function powerline_precmd() {
-    export PS1="$(~/.customizations/powerline-shell.py --mode=patched --shell zsh $? 2>/dev/null) "
+    if [[  ( -z $SSH_TTY ) && ( -z $SSH_CLIENT ) ]]; then
+        # Not running over SSH -- use patched
+        MODE="--mode=patched"
+    else
+        MODE="--mode=flat"
+    fi
+    export PS1="$(~/.customizations/powerline-shell.py $MODE --shell zsh $? 2>/dev/null) "
 }
 if [ x$DISPLAY != x ]; then
     # Enable xterm transparency. Check for transset-df first, though.
@@ -97,6 +106,7 @@ fi
 
 [[ -d /usr/local/heroku/bin ]] && export PATH=/usr/local/heroku/bin:$PATH
 [[ -d $HOME/.gem/ruby/2.0.0/bin ]] && export PATH=$HOME/.gem/ruby/2.0.0/bin:$PATH
+[[ -d $HOME/.gem/ruby/2.1.0/bin ]] && export PATH=$HOME/.gem/ruby/2.1.0/bin:$PATH
 
 export LESS=-RFX
 
@@ -104,6 +114,17 @@ alias ls='ls -hF --color=tty --group-directories-first'
 alias ll='ls -lF --group-directories-first'
 alias la='ls -AF --group-directories-first'
 alias ~-'cd ~'
+
+# TODO: Fork oh-my-zsh to do stuff like this...?
+alias yc='xclip -selection clipboard -i '
+alias y='xclip -i '
+alias pc='xclip -selection clipboard -o'
+alias p='xclip -o'
+
+# Easy file 'cutting'
+# e.g. $ drop 100 file.txt | take 5
+drop() { tail -n +$@ ;}
+take() { head -n $@ ;}
 
 cd() { builtin cd $@ && ls ;}
 
@@ -113,3 +134,5 @@ export PYTHONSTARTUP=$HOME/.pyrc
 
 # shucks config file
 [[ -f $HOME/.shucks ]] && export SHUCKS=$HOME/.shucks
+
+alias -g NUL=' >&/dev/null'
