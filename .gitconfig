@@ -21,6 +21,7 @@
     co = checkout
     d = diff
     dc = diff --cached # Include staged files
+    get = fetch
     # If only I could alias graph = ls --graph --decorate --all
     gp = log --graph --decorate --all --oneline --format='%C(green bold)%h%Creset %C(yellow bold)[%ar]%Creset %C(red bold)%d%Creset %s %C(blue bold)<%an>%Creset'
     graph = log --graph --decorate --all --oneline --format='%C(green bold)%h%Creset %C(yellow bold)[%ar]%Creset %C(red bold)%d%Creset %s %C(blue bold)<%an>%Creset'
@@ -61,3 +62,5 @@
     sslVerify = false
 [push]
 	default = tracking
+[include]
+    path = .digi.gitconfig
