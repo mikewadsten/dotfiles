@@ -136,3 +136,4 @@ export PYTHONSTARTUP=$HOME/.pyrc
 [[ -f $HOME/.shucks ]] && export SHUCKS=$HOME/.shucks
 
 alias -g NUL=' >&/dev/null'
+. ~/dotfiles/z/z.sh
