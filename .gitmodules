@@ -5,3 +5,6 @@
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
 	url = https://github.com/mikewadsten/oh-my-zsh
+[submodule "z"]
+    path = z
+    url = https://github.com/rupa/z
