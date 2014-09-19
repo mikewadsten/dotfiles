@@ -6,6 +6,7 @@
 [core]
     editor = vim
     excludesfile = ~/.git_excludes
+    autocrlf = input
 [help]
     autocorrect = 1
 [init]
@@ -37,6 +38,7 @@
     rv = revert
     s = status --short -b
     sl = shortlog
+    snu = status --untracked-files=no
     st = status
     un = reset HEAD
     unstage = reset HEAD
