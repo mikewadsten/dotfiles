@@ -1,6 +1,6 @@
 URxvt.antialias: true
 URxvt.font: xft:Meslo LG M for Powerline:pixelsize=16:antialias=true:hinting=true
-!:antialias=true:hinting=true
+URxvt*scrollBar_right: true
 
 ! Base16 Ocean
 ! Scheme: Chris Kempson (http://chriskempson.com)
