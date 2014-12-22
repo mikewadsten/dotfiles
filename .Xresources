@@ -1,77 +1,76 @@
-! Solarized color scheme for the X Window System
-!
-! http://ethanschoonover.com/solarized
+URxvt.antialias: true
+URxvt.font: xft:Meslo LG M for Powerline:pixelsize=16:antialias=true:hinting=true
+!:antialias=true:hinting=true
+
+! Base16 Ocean
+! Scheme: Chris Kempson (http://chriskempson.com)
+
+!#define base00 #2b303b
+!#define base01 #343d46
+!#define base02 #4f5b66
+!#define base03 #65737e
+!#define base04 #a7adba
+!#define base05 #c0c5ce
+!#define base06 #dfe1e8
+!#define base07 #eff1f5
+!#define base08 #bf616a
+!#define base09 #d08770
+!#define base0A #ebcb8b
+!#define base0B #a3be8c
+!#define base0C #96b5b4
+!#define base0D #8fa1b3
+!#define base0E #b48ead
+!#define base0F #ab7967
+
+!*.foreground:   base05
+!*.background:   base00
+!*.cursorColor:  base05
+
+!*.color0:       base00
+!*.color1:       base08
+!*.color2:       base0B
+!*.color3:       base0A
+!*.color4:       base0D
+!*.color5:       base0E
+!*.color6:       base0C
+!*.color7:       base05
+
+!*.color8:       base03
+!*.color9:       base09
+!*.color10:      base01
+!*.color11:      base02
+!*.color12:      base04
+!*.color13:      base06
+!*.color14:      base0F
+!*.color15:      base07
+
+!*.color21:      base06
 
 
-! Common
+*foreground:    #ddeedd
+*background:    #131D24
 
-#define S_yellow        #b58900
-#define S_orange        #cb4b16
-#define S_red           #dc322f
-#define S_magenta       #d33682
-#define S_violet        #6c71c4
-#define S_blue          #268bd2
-#define S_cyan          #2aa198
-#define S_green         #859900
-
-
-! Dark
-
-#define S_base03        #002b36
-#define S_base02        #073642
-#define S_base01        #586e75
-#define S_base00        #657b83
-#define S_base0         #839496
-#define S_base1         #93a1a1
-#define S_base2         #eee8d5
-#define S_base3         #fdf6e3
-
-
-! Light
-
-! #define S_base03        #fdf6e3
-! #define S_base02        #eee8d5
-! #define S_base01        #93a1a1
-! #define S_base00        #839496
-! #define S_base0         #657b83
-! #define S_base1         #586e75
-! #define S_base2         #073642
-! #define S_base3         #002b36
-
-
-! To only apply colors to your terminal, for example, prefix
-! the color assignment statement with its name. Example:
-!
-! URxvt*background:            S_base03
-
-XTerm*background:              S_base03
-XTerm*foreground:              S_base0
-XTerm*fading:                  40
-XTerm*fadeColor:               S_base03
-XTerm*cursorColor:             S_base1
-XTerm*pointerColorBackground:  S_base01
-XTerm*pointerColorForeground:  S_base1
-
-XTerm*color0:                  S_base02
-XTerm*color1:                  S_red
-XTerm*color2:                  S_green
-XTerm*color3:                  S_yellow
-XTerm*color4:                  S_blue
-XTerm*color5:                  S_magenta
-XTerm*color6:                  S_cyan
-XTerm*color7:                  S_base2
-XTerm*color9:                  S_orange
-XTerm*color8:                  S_base03
-XTerm*color10:                 S_base01
-XTerm*color11:                 S_base00
-XTerm*color12:                 S_base0
-XTerm*color13:                 S_violet
-XTerm*color14:                 S_base1
-XTerm*color15:                 S_base3
-
-| Mike
-XTerm*faceName: Meslo LG M for Powerline:antialias=false
-XTerm*faceSize: 10
-
-XTerm*transparent: true
-XTerm*shading: 20
+!black
+*color0:    #25374A
+*color8:    #3A526B
+!red
+*color1:    #BD4A4A
+*color9:    #CC6666
+!green
+*color2:    #B7CE42
+*color10:   #BDE077
+!yellow
+*color3:    #FEA63C
+*color11:   #FFE863
+!blue
+*color4:    #66AABB
+*color12:   #AACCBB
+!magenta
+*color5:    #F26B9E
+*color13:   #ff5879
+!cyan
+*color6:    #72AD8C
+*color14:   #9FE3BC
+!white
+*color7:    #DDEEDD
+*color15:   #FFFFFF
