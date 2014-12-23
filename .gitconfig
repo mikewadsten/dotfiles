@@ -37,6 +37,10 @@
     rs = reset
     rv = revert
     s = status --short -b
+    # Basic git daemon execution. Allows fetches, no pushes.
+    serve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
+    # `git serve`, but allowing pushes and giving better errors. Here be dragons.
+    server = !git serve --informative-errors --enable=receive-pack
     sl = shortlog
     snu = status --untracked-files=no
     st = status
