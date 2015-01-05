@@ -11,6 +11,11 @@
 
 set $mod Mod4
 
+# Initial start-up
+exec urxvt
+
+exec --no-startup-id feh --bg-center ~/.config/wallhaven-50612.png
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
@@ -160,3 +165,4 @@ bar {
 
 # Application-specific settings
 for_window [class="Chromium" title=" - Chromium$"] border none
+for_window [class="URxvt"] border pixel
