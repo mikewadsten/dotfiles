@@ -161,7 +161,7 @@ bindsym $mod+o scratchpad show
 bar {
         status_command i3status -c ~/.i3/status.conf
 #       font pango:Meslo LG M for Powerline 10
-        font pango:Font Awesome 10
+        font pango:Font Awesome 11
 }
 
 # Application-specific settings
