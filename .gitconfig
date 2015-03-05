@@ -68,6 +68,6 @@
 [http]
     sslVerify = false
 [push]
-	default = tracking
+    default = upstream
 [include]
     path = .digi.gitconfig
