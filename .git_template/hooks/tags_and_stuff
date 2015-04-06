@@ -1,0 +1,4 @@
+#!/bin/sh
+
+.git/hooks/ctags
+.git/hooks/cscope

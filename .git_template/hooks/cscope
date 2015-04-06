@@ -1,0 +1,14 @@
+#!/bin/sh
+
+#
+# Easy cscope with Git
+# Based on: http://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
+#
+
+set -e
+PATH="/usr/bin:$PATH"
+trap "rm -f .git/cscope.$$ .git/cscope.$$.in .git/cscope.$$.po" EXIT
+cscope -Rbq -f .git/cscope.$$
+mv .git/cscope.$$ .git/cscope
+mv .git/cscope.$$.in .git/cscope.in
+mv .git/cscope.$$.po .git/cscope.po
