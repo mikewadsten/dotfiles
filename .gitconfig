@@ -69,5 +69,7 @@
     sslVerify = false
 [push]
     default = upstream
+[tag]
+    sort = -version:refname
 [include]
     path = .digi.gitconfig
