@@ -18,7 +18,11 @@ antigen bundles <<EOBUNDLES
     pip
     command-not-found
     rupa/z
+    python
+    virtualenvwrapper
 EOBUNDLES
+
+export WORKON_HOME=$HOME/.envs
 
 # Fix using SSH in urxvt, and tmux over SSH
 if [[ $TERM == 'rxvt-unicode' ]] || [[ -n "$SSH_TTY" ]]; then
