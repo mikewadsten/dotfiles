@@ -9,6 +9,6 @@
 set -e
 PATH="/usr/local/bin:$PATH"
 trap "rm -f .git/GPATH .git/GTAGS .git/GRTAGS" EXIT
-gtags --gtagslabel ctags .git/
+gtags --gtagslabel ctags .git/ 2>&1 >/dev/null
 # Move generated files down to root directory
 mv -f .git/GPATH .git/GTAGS .git/GRTAGS .

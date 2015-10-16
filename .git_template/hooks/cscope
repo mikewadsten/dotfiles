@@ -8,7 +8,7 @@
 set -e
 PATH="/usr/bin:$PATH"
 trap "rm -f .git/cscope.$$ .git/cscope.$$.in .git/cscope.$$.po" EXIT
-cscope -Rbq -f .git/cscope.$$
-mv .git/cscope.$$ .git/cscope
-mv .git/cscope.$$.in .git/cscope.in
-mv .git/cscope.$$.po .git/cscope.po
+cscope -Rbq -f .git/cscope.$$ 2>&1 >/dev/null
+mv -f .git/cscope.$$ .git/cscope
+mv -f .git/cscope.$$.in .git/cscope.in
+mv -f .git/cscope.$$.po .git/cscope.po

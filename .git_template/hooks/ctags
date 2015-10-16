@@ -8,5 +8,5 @@
 set -e
 PATH="/usr/local/bin:$PATH"
 trap "rm -f .git/tags.$$" EXIT
-ctags --tag-relative -Rf.git/tags.$$ --exclude=.git --languages=-javascript,sql
-mv .git/tags.$$ .git/tags
+ctags --tag-relative -Rf.git/tags.$$ --exclude=.git --languages=-javascript,sql 2>&1 >/dev/null
+mv -f .git/tags.$$ .git/tags
