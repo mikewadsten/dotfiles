@@ -2,3 +2,4 @@
 
 .git/hooks/ctags
 .git/hooks/cscope
+.git/hooks/gtags
