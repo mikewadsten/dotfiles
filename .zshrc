@@ -6,6 +6,8 @@ if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/tty1 ]]; then
     fi
 fi
 
+[[ -z "$EDITOR" ]] && export EDITOR=vim
+
 COMPLETION_WAITING_DOTS="true"
 source "$HOME/.antigen.zsh"
 
