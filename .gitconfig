@@ -16,7 +16,7 @@
 [alias] # Some stolen from Josh Davis
     a = add
     br = branch
-    ci = commit
+    ci = commit -v
     ciam = commit --amend
     cl = clone
     co = checkout
@@ -50,7 +50,7 @@
     # New commands
     # As specified by Josh Davis (https://github.com/jdavis/dotfiles)
     amend = commit --amend
-    ctags = !.git/hooks/ctags
+    ctags = !.git/hooks/tags_and_stuff
     untrack = update-index --assume-unchanged
     track = update-index --no-assume-unchanged
 
@@ -69,6 +69,9 @@
     sslVerify = false
 [push]
     default = upstream
+[pull]
+    # Never start a merge when pulling
+    ff = only
 [tag]
     sort = -version:refname
 [include]
