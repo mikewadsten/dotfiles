@@ -132,3 +132,18 @@ command -v make 2>&1 >/dev/null && alias make='make -s --no-print-directory'
 
 take() { head -n $@ ;}
 drop() { head -n -$@ ;}
+
+othergit() {
+    local dir="$1"
+    if [[ "$1" == "" ]]; then
+        echo "$0: Need to provide at least a directory path..."
+        return 1
+    fi
+    if [[ ! -d "$1/.git" ]]; then
+        echo "$0: '$1/.git' does not exist"
+        return 1
+    fi
+    shift
+
+    git --git-dir="$dir/.git" --work-tree="$dir" $@
+}
