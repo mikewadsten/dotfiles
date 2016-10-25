@@ -1,10 +1,12 @@
 " dotvim
 " A fresh take on my Vim/Neovim setup.
 
+set nocompatible
 set mouse=a
 set virtualedit=onemore
 
-" Stuff copied from vim-sensible {
+" Stuff copied from vim-sensible {{
+
 if has('autocmd')
   filetype plugin indent on
 endif
@@ -63,7 +65,7 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
 
-" }
+" }}
 
 " Abbreviate messages, and hide the intro
 set shortmess+=aoOtTI
@@ -195,29 +197,30 @@ set bg=dark
 exe 'source ' . fnamemodify(resolve(expand("<sfile>:p")), ':h') . '/plugins.vim'
 
 " Colorscheme {
-let g:solarized_termcolors=256
-let g:solarized_termtrans = 0
-let g:solarized_contrast="high"
-colorscheme solarized
 
-" hi LineNR ctermbg=NONE ctermfg=237
-hi VertSplit ctermbg=236 ctermfg=236
+  let g:solarized_termcolors=256
+  let g:solarized_termtrans = 1
+  let g:solarized_contrast="high"
+  colorscheme solarized
 
-" The following content provided by:
-" howivim airblade
+  " hi LineNR ctermbg=NONE ctermfg=237
+  hi VertSplit ctermbg=236 ctermfg=236
 
-hi clear StatusLine
-hi clear StatusLineNC
-" hi StatusLine   term=bold cterm=bold ctermfg=White ctermbg=235
-hi StatusLine term=bold cterm=bold ctermfg=White ctermbg=4
-hi StatusLineNC term=none cterm=none ctermfg=White ctermbg=236
-hi User1                      ctermfg=4          guifg=#40ffff            " Identifier
-hi User2                      ctermfg=2 gui=bold guifg=#ffff60            " Statement
-hi User3 term=bold cterm=bold ctermfg=1          guifg=White   guibg=Red  " Error
-hi User4                      ctermfg=1          guifg=Orange             " Special
-hi User5                      ctermfg=10         guifg=#80a0ff            " Comment
-hi User6 term=bold cterm=bold ctermfg=1          guifg=Red                " WarningMsg
-set laststatus=2
+  " The following content provided by:
+  " howivim airblade
+
+  hi clear StatusLine
+  hi clear StatusLineNC
+  " hi StatusLine   term=bold cterm=bold ctermfg=White ctermbg=235
+  hi StatusLine term=bold cterm=bold ctermfg=white ctermbg=4
+  hi StatusLineNC term=none cterm=none ctermfg=White ctermbg=236
+  hi User1                      ctermfg=4          guifg=#40ffff            " Identifier
+  hi User2                      ctermfg=2 gui=bold guifg=#ffff60            " Statement
+  hi User3 term=bold cterm=bold ctermfg=1          guifg=White   guibg=Red  " Error
+  hi User4                      ctermfg=1          guifg=Orange             " Special
+  hi User5                      ctermfg=10         guifg=#80a0ff            " Comment
+  hi User6 term=bold cterm=bold ctermfg=1          guifg=Red                " WarningMsg
+  set laststatus=2
 
 " }
 
