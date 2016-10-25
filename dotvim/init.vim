@@ -18,7 +18,7 @@ endif
 " (Single quotes ensures :help finds the option.)
 set autoindent
 set backspace=indent,eol,start
-set complete=.,w,b,u,t
+set complete=.,w,b,u,t,i
 set smarttab
 
 set nrformats-=octal
@@ -42,6 +42,8 @@ set scrolloff=1 scrolljump=1
 set sidescrolloff=5
 set display=lastline
 
+set splitright splitbelow
+
 if v:version > 703 || v:version == 703 && has("patch541")
   set formatoptions+=j  " Delete comment character when joining commented lines
 endif
@@ -52,6 +54,7 @@ set history=1000
 if !empty(&viminfo)
   set viminfo^=!
 endif
+set noswapfile
 
 set sessionoptions-=options
 
@@ -74,6 +77,7 @@ if has('persistent_undo')
   set undofile
   set undolevels=1000
   set undoreload=10000
+  exe 'set undodir=' . $HOME . '/.vimundo'
 endif
 
 " set spell
@@ -101,6 +105,8 @@ else
 endif
 set expandtab
 set shiftround
+
+set colorcolumn=80
 
 " Key mappings {
   " Escape is annoying to hit.
@@ -151,6 +157,9 @@ set shiftround
   nnoremap Q @@
 " }
 
+" Switch to current file directory automatically
+autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | exe 'lcd ' . fnamemodify(resolve(expand('%:p')), ':h') | endif
+
 " TODO: cscope {
 " }
 
@@ -193,13 +202,25 @@ set shiftround
 
 " TODO: Plugins!
 set bg=dark
+let s:dotvim_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+function! s:LoadDotvimFile(name)
+  let l:fpath =  s:dotvim_path . '/' . a:name
+  if filereadable(l:fpath)
+    exe 'source ' . l:fpath
+  else
+    echo "not readable: " . l:fpath
+  endif
+endfunction
+" If there's a preplug.work.vim file, load it first. Lets us make settings for
+" plugins, etc.
+call s:LoadDotvimFile('preplug.work.vim')
 " Find the plugins.vim alongside this init.vim file!
-exe 'source ' . fnamemodify(resolve(expand("<sfile>:p")), ':h') . '/plugins.vim'
+call s:LoadDotvimFile('plugins.vim')
 
 " Colorscheme {
 
   let g:solarized_termcolors=256
-  let g:solarized_termtrans = 1
+  let g:solarized_termtrans = 0
   let g:solarized_contrast="high"
   colorscheme solarized
 
@@ -212,7 +233,7 @@ exe 'source ' . fnamemodify(resolve(expand("<sfile>:p")), ':h') . '/plugins.vim'
   hi clear StatusLine
   hi clear StatusLineNC
   " hi StatusLine   term=bold cterm=bold ctermfg=White ctermbg=235
-  hi StatusLine term=bold cterm=bold ctermfg=white ctermbg=4
+  hi StatusLine term=bold cterm=bold ctermfg=white ctermbg=24
   hi StatusLineNC term=none cterm=none ctermfg=White ctermbg=236
   hi User1                      ctermfg=4          guifg=#40ffff            " Identifier
   hi User2                      ctermfg=2 gui=bold guifg=#ffff60            " Statement
@@ -228,7 +249,7 @@ exe 'source ' . fnamemodify(resolve(expand("<sfile>:p")), ':h') . '/plugins.vim'
 augroup mikeInitReload
   autocmd!
   " After each write to this init.vim file, source it.
-  execute 'autocmd! BufWritePost ' . expand('<sfile>:p') . " source %"
+  execute 'autocmd! BufWritePost ' . resolve(expand('<sfile>:p')) . " source %"
 augroup END
 
 augroup restoreCursor
