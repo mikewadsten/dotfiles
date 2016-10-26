@@ -11,12 +11,37 @@ if empty(glob(s:plug_path))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+" Settings {{
+
 " let g:SuperTabDefaultCompletionType = "<c-n>"
 
+  let g:switch_custom_definitions =
+        \ [
+        \   {'\<==\>': '\<!=\>', '\<!=\>': '\<==\>'}
+        \ ]
+
+  " CppUTest test macros
+  let s:switch_cpputest = {
+        \ '\<TEST\>': 'IGNORE_TEST',
+        \ '\<IGNORE_TEST\>': 'TEST' }
+  autocmd Filetype cpp let b:switch_custom_definitions =
+        \ [
+        \   s:switch_cpputest
+        \ ]
+
+  autocmd Filetype python let b:switch_custom_definitions =
+        \ [
+        \   ['\<or\>', '\<and\>'],
+        \ ]
+
+" }}
+
 call plug#begin('~/personal/dotfiles/dotvim/plugged')
+
 Plug 'altercation/vim-colors-solarized'
+
+" So much Tim Pope...
 Plug 'tpope/vim-surround'
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dispatch'
@@ -24,7 +49,14 @@ Plug 'tpope/vim-unimpaired'
 let g:commentary_map_backslash = 0
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-scriptease'
+
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'airblade/vim-gitgutter'
+
 Plug 'tmhedberg/matchit'
+Plug 'python_match.vim'
+
+Plug 'python.vim'
 
 Plug 'justinmk/vim-dirvish'
 
@@ -36,6 +68,10 @@ Plug 'ervandew/supertab'
 Plug 'embear/vim-localvimrc'
 
 Plug 'jiangmiao/auto-pairs'
+
+Plug 'AndrewRadev/switch.vim'
+
+" TODO: vim-over?
 call plug#end()
 
 " Total hack

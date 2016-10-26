@@ -166,6 +166,9 @@ set showmode
   " provides, so let's override that.
   noremap _ -
 
+  " switch.vim
+  nnoremap <silent> <BS> :Switch<CR>
+
 " }
 
 " Switch to current file directory automatically
@@ -212,6 +215,7 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | exe 'lcd ' . fnamemo
 " TODO: neovim-specific stuff
 
 " Plugins! {{
+
   set bg=dark
 
   let s:dotvim_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
