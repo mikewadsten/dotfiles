@@ -34,6 +34,8 @@ Plug 'garbas/vim-snipmate'
 Plug 'ervandew/supertab'
 
 Plug 'embear/vim-localvimrc'
+
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 " Total hack

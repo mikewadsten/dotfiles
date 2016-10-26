@@ -117,6 +117,8 @@ set showmode
   vnoremap q <Esc>
 
   nnoremap <silent> <Leader>/ :set invhlsearch<CR>
+  " I seem to have a habit of hitting q and then leader...
+  nmap <silent> q, ,
 
   " Stupid shift-key fixes
   if has("user_commands")
@@ -209,23 +211,28 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | exe 'lcd ' . fnamemo
 
 " TODO: neovim-specific stuff
 
-" TODO: Plugins!
-set bg=dark
-let s:dotvim_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
-function! s:LoadDotvimFile(name)
-  let l:fpath =  s:dotvim_path . '/' . a:name
-  if filereadable(l:fpath)
-    exe 'source ' . l:fpath
-  " else
-  "   echo "not readable: " . l:fpath
-  endif
-endfunction
-" If there's a preplug.work.vim file, load it first. Lets us make settings for
-" plugins, etc.
-call s:LoadDotvimFile('preplug.work.vim')
-call s:LoadDotvimFile('preplug.local.vim')
-" Find the plugins.vim alongside this init.vim file!
-call s:LoadDotvimFile('plugins.vim')
+" Plugins! {{
+  set bg=dark
+
+  let s:dotvim_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+  function! s:LoadDotvimFile(name)
+    let l:fpath =  s:dotvim_path . '/' . a:name
+    if filereadable(l:fpath)
+      exe 'source ' . l:fpath
+    " else
+    "   echo "not readable: " . l:fpath
+    endif
+  endfunction
+
+  " If there's a preplug.work.vim file, load it first. Lets us make settings for
+  " plugins, etc.
+  call s:LoadDotvimFile('preplug.work.vim')
+  call s:LoadDotvimFile('preplug.local.vim')
+
+  " Find the plugins.vim alongside this init.vim file!
+  call s:LoadDotvimFile('plugins.vim')
+
+" }}
 
 " Colorscheme {
 
@@ -253,7 +260,8 @@ call s:LoadDotvimFile('plugins.vim')
   hi User6 term=bold cterm=bold ctermfg=1          guifg=Red                " WarningMsg
   set laststatus=2
 
-set stl=%6*%m%r%*%5*%{expand('%:p:h')}/%1*%t%=line\ %l\ (%p%%)
+" set stl=%6*%m%r%*%5*%{expand('%:p:h')}/%1*%t%=line\ %l\ (%p%%)
+set stl=""
 
 " }
 
@@ -262,6 +270,8 @@ set stl=%6*%m%r%*%5*%{expand('%:p:h')}/%1*%t%=line\ %l\ (%p%%)
   " 99% of my C++ use (at work) is in unit tests, and scanning the includes
   " there can take a second or two each time. Don't do this.
   autocmd! Filetype cpp setlocal complete-=i
+
+  autocmd! Filetype cpp,html,xml let b:AutoPairs=g:AutoPairs | let b:AutoPairs['<'] = '>'
 
 " }
 
