@@ -158,6 +158,12 @@ set showmode
 
   " I have literally never used Ex mode. Make Q a bit more useful.
   nnoremap Q @@
+
+  " vim-dirvish takes over -, but now that I know about what + does, I would
+  " sort of like the functionality of - (minus)! But I don't need what _
+  " provides, so let's override that.
+  noremap _ -
+
 " }
 
 " Switch to current file directory automatically
