@@ -77,7 +77,7 @@ if has('persistent_undo')
   set undofile
   set undolevels=1000
   set undoreload=10000
-  exe 'set undodir=' . $HOME . '/.vimundo'
+  let &undodir=$HOME . '/.vimundo'
 endif
 
 " set spell
@@ -107,6 +107,7 @@ set expandtab
 set shiftround
 
 set colorcolumn=80
+set showmode
 
 " Key mappings {
   " Escape is annoying to hit.
@@ -114,6 +115,8 @@ set colorcolumn=80
   " And I've become rather addicted to just hitting q to cancel everything...
   " ... plus, nobody starts a macro while in visual mode... right?
   vnoremap q <Esc>
+
+  nnoremap <silent> <Leader>/ :set invhlsearch<CR>
 
   " Stupid shift-key fixes
   if has("user_commands")
@@ -207,13 +210,14 @@ function! s:LoadDotvimFile(name)
   let l:fpath =  s:dotvim_path . '/' . a:name
   if filereadable(l:fpath)
     exe 'source ' . l:fpath
-  else
-    echo "not readable: " . l:fpath
+  " else
+  "   echo "not readable: " . l:fpath
   endif
 endfunction
 " If there's a preplug.work.vim file, load it first. Lets us make settings for
 " plugins, etc.
 call s:LoadDotvimFile('preplug.work.vim')
+call s:LoadDotvimFile('preplug.local.vim')
 " Find the plugins.vim alongside this init.vim file!
 call s:LoadDotvimFile('plugins.vim')
 
@@ -243,6 +247,16 @@ call s:LoadDotvimFile('plugins.vim')
   hi User6 term=bold cterm=bold ctermfg=1          guifg=Red                " WarningMsg
   set laststatus=2
 
+set stl=%6*%m%r%*%5*%{expand('%:p:h')}/%1*%t%=line\ %l\ (%p%%)
+
+" }
+
+" Filetypes {
+
+  " 99% of my C++ use (at work) is in unit tests, and scanning the includes
+  " there can take a second or two each time. Don't do this.
+  autocmd! Filetype cpp setlocal complete-=i
+
 " }
 
 " TODO total hack
@@ -259,5 +273,68 @@ augroup restoreCursor
         \ execute 'normal! g`"' | 
         \ endif
 augroup END
+
+" scriptease-lite {
+
+" TODO: figure out what to do with this
+function! s:get_visual_selection()
+  let sel_save = &selection
+  let cb_save = &clipboard
+  let reg_save = @@
+  try
+    set selection=inclusive clipboard-=unnamed clipboard-=unnamedplus
+    silent exe "normal! gvy"
+    redraw
+    let foo = substitute(@@, '\v\C\n%(\s*\\)=', '', 'g')
+    let b:vis = foo
+    return foo
+  finally
+    let @@ = reg_save
+    let &selection = sel_save
+    let &clipboard = cb_save
+  endtry
+endfunction
+
+" Scan current line and up for any continuation lines,
+" then down, joining continuations. Returns full string.
+function! s:grab_code_here()
+  let l:curline = line('.')
+  let l:continuation = '\v\C^%(\s*\\)'
+  while l:curline > -1 && (match(getline(l:curline), l:continuation) != -1)
+    let l:curline -= 1
+  endwhile
+
+  if l:curline <= 1
+    echoerr "grab_code_here(): got to top of file!"
+    return ""
+  endif
+
+  let l:content = getline(l:curline)
+  let l:curline += 1
+  while l:curline <= line('$')
+    let l:line = getline(l:curline)
+    if -1 == match(l:line, l:continuation)
+      break
+    else
+      let l:content .= substitute(getline(l:curline), l:continuation, '', 'g')
+      let l:curline += 1
+    endif
+  endwhile
+  " let b:code = l:content
+  echom l:content
+  return l:content
+endfunction
+
+let a = 1 + 2
+      \ + 3 *
+      \ 4
+
+" xnoremap <silent> gz :<C-U>call <SID>get_visual_selection()<CR>
+
+" Execute the line of vimscript under the cursor (as found by scanning for
+" continuations) -- intended for use when hacking on statusline format.
+autocmd Filetype vim nnoremap <buffer> <silent> gz :execute <SID>grab_code_here()<CR>
+
+" }
 
 " vim: set ft=vim et sw=2 ts=2 sts=2:

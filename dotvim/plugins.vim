@@ -23,6 +23,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-unimpaired'
 let g:commentary_map_backslash = 0
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-scriptease'
 Plug 'tmhedberg/matchit'
 
 Plug 'justinmk/vim-dirvish'
