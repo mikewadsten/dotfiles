@@ -218,7 +218,7 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" |
 
 " Plugins! {{
 
-  set bg=dark
+  set background=dark
 
   let s:dotvim_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
   function! LoadDotvimFile(name)
@@ -245,7 +245,14 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" |
   let g:solarized_termcolors=256
   let g:solarized_termtrans = 0
   let g:solarized_contrast="high"
-  colorscheme solarized
+  try
+    set background=dark
+    colorscheme solarized
+  catch /E185:/
+    echo "solarized colorscheme not found, let's do a PlugInstall"
+    PlugInstall
+    colorscheme solarized
+  endtry
 
   " hi LineNR ctermbg=NONE ctermfg=237
   hi VertSplit ctermbg=236 ctermfg=236
