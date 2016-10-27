@@ -7,9 +7,9 @@ A relatively barebones Vim setup.
 
   * **Clean**. Nothing (well, almost nothing) is in this setup that I don't use
     regularly.
-  * **Reproducible**. You don't need to worry (much. TODO: don't reference
-    personal/ directory) about where you put these files - just that you
-    properly use `init.vim` as your vimrc file. We figure out the rest.
+  * **Reproducible**. You shouldn't need to worry about where you put these
+    files - just that you properly use `init.vim` as your vimrc file. We figure
+    out the rest.
     * You could even have multiple copies laying around! All plugins get
       installed into a subdirectory of this repo.
 

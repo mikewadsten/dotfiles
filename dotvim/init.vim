@@ -223,6 +223,9 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" |
   set background=dark
 
   let s:dotvim_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+  function! DotvimPath()
+    return s:dotvim_path
+  endfunction
   function! LoadDotvimFile(name)
     let l:fpath =  s:dotvim_path . '/' . a:name
     if filereadable(l:fpath)

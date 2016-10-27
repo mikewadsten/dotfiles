@@ -39,7 +39,8 @@ endif
 
 " }}
 
-call plug#begin('~/personal/dotfiles/dotvim/plugged')
+" Use DotvimPath() for full standalone installation. :)
+call plug#begin(DotvimPath() . '/plugged')
 
 Plug 'altercation/vim-colors-solarized'
 
