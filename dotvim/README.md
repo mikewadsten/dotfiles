@@ -25,4 +25,4 @@ A relatively barebones Vim setup.
 
 # What does it look like?
 
-TODO Take a screenshot
+![dotvim screenshot](dotvim.png)
