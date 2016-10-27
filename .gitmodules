@@ -8,3 +8,6 @@
 [submodule "z"]
     path = z
     url = https://github.com/rupa/z
+[submodule "dotvim"]
+	path = dotvim
+	url = https://github.com/mikewadsten/dotvim.git
