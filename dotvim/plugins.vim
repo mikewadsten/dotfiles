@@ -34,6 +34,9 @@ endif
         \   ['\<or\>', '\<and\>'],
         \ ]
 
+  " I will be integrating bufferline into my own statusline.
+  let g:bufferline_echo = 0
+
 " }}
 
 call plug#begin('~/personal/dotfiles/dotvim/plugged')
@@ -70,6 +73,8 @@ Plug 'embear/vim-localvimrc'
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'AndrewRadev/switch.vim'
+
+Plug 'bling/vim-bufferline'
 
 " TODO: vim-over?
 call plug#end()

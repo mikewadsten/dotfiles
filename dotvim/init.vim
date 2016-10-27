@@ -107,7 +107,7 @@ set expandtab
 set shiftround
 
 set colorcolumn=80
-set showmode
+set noshowmode " This is what wadline is for
 
 " Key mappings {
   " Escape is annoying to hit.
@@ -172,7 +172,9 @@ set showmode
 " }
 
 " Switch to current file directory automatically
-autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | exe 'lcd ' . fnamemodify(resolve(expand('%:p')), ':h') | endif
+autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" |
+      \ execute 'lcd ' . fnamemodify(resolve(expand('%:p')), ':h') |
+      \ endif
 
 " TODO: cscope {
 " }
@@ -198,7 +200,7 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | exe 'lcd ' . fnamemo
   set completeopt=menu,preview,longest
 
   function! s:CompleteMap(key,mapping)
-    execute "inoremap <expr> " . a:key . ' pumvisible() ? "' . a:mapping . '" : "' . a:key . '"'
+    execute printf('inoremap <expr> %s pumvisible() ? "%s" : "%s"', a:key, a:mapping, a:key)
   endfunction
 
   if 0
@@ -219,10 +221,10 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | exe 'lcd ' . fnamemo
   set bg=dark
 
   let s:dotvim_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
-  function! s:LoadDotvimFile(name)
+  function! LoadDotvimFile(name)
     let l:fpath =  s:dotvim_path . '/' . a:name
     if filereadable(l:fpath)
-      exe 'source ' . l:fpath
+      execute "source " . l:fpath
     " else
     "   echo "not readable: " . l:fpath
     endif
@@ -230,11 +232,11 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | exe 'lcd ' . fnamemo
 
   " If there's a preplug.work.vim file, load it first. Lets us make settings for
   " plugins, etc.
-  call s:LoadDotvimFile('preplug.work.vim')
-  call s:LoadDotvimFile('preplug.local.vim')
+  call LoadDotvimFile('preplug.work.vim')
+  call LoadDotvimFile('preplug.local.vim')
 
   " Find the plugins.vim alongside this init.vim file!
-  call s:LoadDotvimFile('plugins.vim')
+  call LoadDotvimFile('plugins.vim')
 
 " }}
 
@@ -254,8 +256,6 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | exe 'lcd ' . fnamemo
   hi clear StatusLine
   hi clear StatusLineNC
   " hi StatusLine   term=bold cterm=bold ctermfg=White ctermbg=235
-  hi StatusLine term=bold cterm=bold ctermfg=white ctermbg=24
-  hi StatusLineNC term=none cterm=none ctermfg=White ctermbg=236
   hi User1                      ctermfg=4          guifg=#40ffff            " Identifier
   hi User2                      ctermfg=2 gui=bold guifg=#ffff60            " Statement
   hi User3 term=bold cterm=bold ctermfg=1          guifg=White   guibg=Red  " Error
@@ -264,8 +264,8 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | exe 'lcd ' . fnamemo
   hi User6 term=bold cterm=bold ctermfg=1          guifg=Red                " WarningMsg
   set laststatus=2
 
-" set stl=%6*%m%r%*%5*%{expand('%:p:h')}/%1*%t%=line\ %l\ (%p%%)
-set stl=""
+  " My own personal statusline 'plugin'
+  call LoadDotvimFile('wadline.vim')
 
 " }
 
@@ -275,7 +275,7 @@ set stl=""
   " there can take a second or two each time. Don't do this.
   autocmd! Filetype cpp setlocal complete-=i
 
-  autocmd! Filetype cpp,html,xml let b:AutoPairs=g:AutoPairs | let b:AutoPairs['<'] = '>'
+  autocmd! Filetype cpp,html,xml let b:AutoPairs = extend({'<': '>'}, g:AutoPairs, 'keep')
 
 " }
 
@@ -283,7 +283,7 @@ set stl=""
 augroup mikeInitReload
   autocmd!
   " After each write to this init.vim file, source it.
-  execute 'autocmd! BufWritePost ' . resolve(expand('<sfile>:p')) . " source %"
+  execute printf('autocmd! BufWritePost %s source %%', resolve(expand('<sfile>:p')))
 augroup END
 
 augroup restoreCursor
