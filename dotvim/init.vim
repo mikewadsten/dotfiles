@@ -116,10 +116,6 @@ set noshowmode " This is what wadline is for
   " ... plus, nobody starts a macro while in visual mode... right?
   vnoremap q <Esc>
 
-  nnoremap <silent> <Leader>/ :set invhlsearch<CR>
-  " I seem to have a habit of hitting q and then leader...
-  nmap <silent> q, ,
-
   " Stupid shift-key fixes
   if has("user_commands")
     command! -bang -nargs=* -complete=file E e<bang> <args>
@@ -139,6 +135,12 @@ set noshowmode " This is what wadline is for
   endif
 
   let mapleader = ','
+
+  nmap <silent> <Leader>/ :set invhlsearch<CR>
+  " I seem to have a habit of hitting q and then leader...
+  nmap <silent> q, ,
+  " and q:. Who even uses Ex mode, I mean come on.
+  nnoremap <silent> q: :
 
   " Jump to merge conflict markers.
   map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
