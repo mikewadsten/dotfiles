@@ -46,6 +46,7 @@
     st = status
     un = reset HEAD
     unstage = reset HEAD
+    upstream = "!f() { branch=$(git rev-parse --abbrev-ref HEAD); git branch --set-upstream-to=${1:-origin}/${branch} ${branch} ;}; f"
 
     # New commands
     # As specified by Josh Davis (https://github.com/jdavis/dotfiles)
@@ -56,8 +57,13 @@
 
     # Show Git repository root
     root = rev-parse --show-toplevel
+    trymerge = "!f() { git merge --no-commit --no-ff ${1}; git merge --abort ;}; f"
 [color]
-    ui = true
+    ui = always
+    status = always
+    branch = always
+    diff = always
+    interactive = always
     [color "diff"]
         meta = yellow bold
         frag = magenta bold
