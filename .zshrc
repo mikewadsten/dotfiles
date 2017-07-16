@@ -9,9 +9,10 @@ fi
 [[ -z "$EDITOR" ]] && export EDITOR=vim
 
 COMPLETION_WAITING_DOTS="true"
-source "$HOME/.antigen.zsh"
+ZSH="$HOME/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-mikewadsten-SLASH-oh-my-zsh.git"
+ANTIGEN_DEFAULT_REPO_URL="https://github.com/mikewadsten/oh-my-zsh.git"
 
-ZSH="$HOME/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh.git"
+source "$HOME/.antigen.zsh"
 
 antigen bundles <<EOBUNDLES
     mikewadsten/oh-my-zsh custom
