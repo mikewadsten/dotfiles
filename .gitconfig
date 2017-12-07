@@ -58,6 +58,7 @@
     # Show Git repository root
     root = rev-parse --show-toplevel
     trymerge = "!f() { git merge --no-commit --no-ff ${1}; git merge --abort ;}; f"
+    sha = rev-parse HEAD
 [color]
     ui = always
     status = always
