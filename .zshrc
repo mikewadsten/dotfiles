@@ -9,26 +9,33 @@ fi
 [[ -z "$EDITOR" ]] && export EDITOR=vim
 
 COMPLETION_WAITING_DOTS="true"
-ZSH="$HOME/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-mikewadsten-SLASH-oh-my-zsh.git"
+ZSH="$HOME/.antigen/bundles/mikewadsten/oh-my-zsh"
 ANTIGEN_DEFAULT_REPO_URL="https://github.com/mikewadsten/oh-my-zsh.git"
+if python -V 2>&1 | grep -q 'Python 3' >/dev/null
+then
+    VIRTUALENVWRAPPER_PYTHON=$(which python2.7)
+else
+    VIRTUALENVWRAPPER_PYTHON=$(which python)
+fi
+source /usr/bin/virtualenvwrapper.sh
+
+export WORKON_HOME=$HOME/.envs
 
 if test -f "$HOME/.antigen.zsh"
 then
+    export ANTIGEN_LOG="$HOME/antigen.log"
     source "$HOME/.antigen.zsh"
 
+    antigen use mikewadsten/oh-my-zsh
     antigen bundles <<EOBUNDLES
-        mikewadsten/oh-my-zsh custom
-        zsh-users/zsh-syntax-highlighting
-        git
-        pip
-        command-not-found
-        rupa/z
-        python
-        virtualenvwrapper
+    zsh-users/zsh-syntax-highlighting
+    git
+    pip
+    command-not-found
+    rupa/z
+    python
 EOBUNDLES
 fi
-
-export WORKON_HOME=$HOME/.envs
 
 # Fix using SSH in urxvt, and tmux over SSH
 if [[ $TERM == 'rxvt-unicode' ]] || [[ -n "$SSH_TTY" ]]; then
@@ -126,9 +133,12 @@ test -f $HOME/.pyrc && export PYTHONSTARTUP=$HOME/.pyrc
 bindkey "^r" history-incremental-search-backward
 export PAGER=less
 
-antigen apply
+if test -f "$HOME/.antigen.zsh"
+then
+    antigen apply
 
-antigen bundle mikewadsten/oh-my-zsh lib/key-bindings.zsh
+    antigen bundle mikewadsten/oh-my-zsh lib/key-bindings.zsh
+fi
 
 export PATH=$PATH:$HOME/bin
 
