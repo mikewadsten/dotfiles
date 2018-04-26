@@ -12,18 +12,21 @@ COMPLETION_WAITING_DOTS="true"
 ZSH="$HOME/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-mikewadsten-SLASH-oh-my-zsh.git"
 ANTIGEN_DEFAULT_REPO_URL="https://github.com/mikewadsten/oh-my-zsh.git"
 
-source "$HOME/.antigen.zsh"
+if test -f "$HOME/.antigen.zsh"
+then
+    source "$HOME/.antigen.zsh"
 
-antigen bundles <<EOBUNDLES
-    mikewadsten/oh-my-zsh custom
-    zsh-users/zsh-syntax-highlighting
-    git
-    pip
-    command-not-found
-    rupa/z
-    python
-    virtualenvwrapper
+    antigen bundles <<EOBUNDLES
+        mikewadsten/oh-my-zsh custom
+        zsh-users/zsh-syntax-highlighting
+        git
+        pip
+        command-not-found
+        rupa/z
+        python
+        virtualenvwrapper
 EOBUNDLES
+fi
 
 export WORKON_HOME=$HOME/.envs
 
@@ -118,7 +121,7 @@ alias ~='cd ~'
 
 cd() { builtin cd $@ && ls ;}
 
-export PYTHONSTARTUP=$HOME/.pyrc
+test -f $HOME/.pyrc && export PYTHONSTARTUP=$HOME/.pyrc
 
 bindkey "^r" history-incremental-search-backward
 export PAGER=less
