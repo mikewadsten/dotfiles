@@ -36,10 +36,15 @@ fi
 [[ "$TERM" == "linux" ]] && return;
 
 autoload -U colors && colors
-PS1="%{$fg[red]%}%n@%m %~ %{$fg_bold[red]%}λ%{$reset_color%} "
 
-alias virtualenv='virtualenv2'
-pip() { pip2 $@ ;}
+test -f ~/.zshrc.$(hostname) && source ~/.zshrc.$(hostname)
+# If _PS1_LOCAL is defined, use that as prompt. Else use a nice default.
+_PS1_DEFAULT="%{$fg[red]%}%n@%m %~ %{$fg_bold[red]%}λ%{$reset_color%} "
+PS1=${_PS1_LOCAL:-${_PS1_DEFAULT}}
+
+# TODO: Only do this if not in the presence of Python 3?
+command -v virtualenv2 >/dev/null && alias virtualenv='virtualenv2'
+command -v pip2 >/dev/null && alias pip='pip2'
 
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -129,7 +134,7 @@ setopt autonamedirs
 [[ -f $HOME/.zshrc.digi ]] && source $HOME/.zshrc.digi
 
 command -v nvim 2>&1 >/dev/null && alias vim='DISPLAY=:0 nvim'
-command -v make 2>&1 >/dev/null && alias make='make -s --no-print-directory'
+# command -v make 2>&1 >/dev/null && alias make='make -s --no-print-directory'
 
 take() { head -n $@ ;}
 drop() { head -n -$@ ;}
