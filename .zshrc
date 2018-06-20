@@ -17,7 +17,7 @@ then
 else
     VIRTUALENVWRAPPER_PYTHON=$(which python)
 fi
-source /usr/bin/virtualenvwrapper.sh
+command -v virtualenvwrapper.sh >/dev/null 2>&1 && source $(which virtualenvwrapper.sh)
 
 export WORKON_HOME=$HOME/.envs
 
