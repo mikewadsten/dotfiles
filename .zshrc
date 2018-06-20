@@ -26,6 +26,7 @@ then
     export ANTIGEN_LOG="$HOME/antigen.log"
     source "$HOME/.antigen.zsh"
 
+    # If PS1 is broken, comment this out. Ugh. (Some theme auto-activating?)
     antigen use mikewadsten/oh-my-zsh
     antigen bundles <<EOBUNDLES
     zsh-users/zsh-syntax-highlighting
