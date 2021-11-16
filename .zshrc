@@ -147,6 +147,8 @@ setopt autonamedirs
 
 [[ -f $HOME/.zshrc.digi ]] && source $HOME/.zshrc.digi
 
+test -d $HOME/.local/bin && export PATH="${PATH}:$HOME/.local/bin"
+
 command -v nvim 2>&1 >/dev/null && alias vim='DISPLAY=:0 nvim'
 # command -v make 2>&1 >/dev/null && alias make='make -s --no-print-directory'
 
