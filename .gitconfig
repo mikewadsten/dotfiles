@@ -10,7 +10,7 @@
 [help]
     autocorrect = 1
 [init]
-    templatedir = ~/.git_template
+    # templatedir = ~/.git_template
 [github]
     user = mikewadsten
 [alias] # Some stolen from Josh Davis
