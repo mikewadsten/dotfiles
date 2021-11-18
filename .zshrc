@@ -91,11 +91,11 @@ function +vi-git-fancy() {
         stoplight+=( "$GIT_PROMPT_UNTRACKED" )
     fi
     # Determine if there are any modified files
-    if ! git diff --quiet 2>/dev/null; then
+    if ! git diff --quiet --ignore-submodules=dirty 2>/dev/null; then
         stoplight+=( "$GIT_PROMPT_MODIFIED" )
     fi
     # Determine if there are any staged files
-    if ! git diff --cached --quiet 2>/dev/null; then
+    if ! git diff --cached --quiet --ignore-submodules=dirty 2>/dev/null; then
         stoplight+=( "$GIT_PROMPT_STAGED" )
     fi
 
