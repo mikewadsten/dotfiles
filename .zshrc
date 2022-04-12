@@ -169,3 +169,5 @@ othergit() {
 
     git --git-dir="$dir/.git" --work-tree="$dir" $@
 }
+
+export GIT_CEILING_DIRECTORIES="/home:${GIT_CEILING_DIRECTORIES}"
