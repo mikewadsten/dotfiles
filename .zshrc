@@ -171,3 +171,12 @@ othergit() {
 }
 
 export GIT_CEILING_DIRECTORIES="/home:${GIT_CEILING_DIRECTORIES}"
+
+if command -v batcat 2>&1 >/dev/null; then
+    alias bat=batcat
+fi
+if command -v rg 2>&1 >/dev/null; then
+    test -f $HOME/.ripgreprc && export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+    # Try to get used to ripgrep
+    alias ag=rg
+fi
