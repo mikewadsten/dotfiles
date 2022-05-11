@@ -55,7 +55,7 @@ PS1=${_PS1_LOCAL:-${_PS1_DEFAULT}}
 
 # TODO: Only do this if not in the presence of Python 3?
 command -v virtualenv2 >/dev/null && alias virtualenv='virtualenv2'
-command -v pip2 >/dev/null && alias pip='pip2'
+# command -v pip2 >/dev/null && alias pip='pip2'
 
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -171,6 +171,13 @@ othergit() {
 }
 
 export GIT_CEILING_DIRECTORIES="/home:${GIT_CEILING_DIRECTORIES}"
+
+if command -v pyenv 2>&1 >/dev/null; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+
+test -d "$HOME/.local/bin" && export PATH="${PATH}:$HOME/.local/bin"
 
 if command -v batcat 2>&1 >/dev/null; then
     alias bat=batcat
