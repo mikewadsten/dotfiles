@@ -72,8 +72,10 @@
         new = green bold
         whitespace = white bold
 # Somehow necessary for https (or ssh?) connections
-[http]
-    sslVerify = false
+; [http]
+;     sslVerify = false
+[commit]
+    verbose = true
 [push]
     default = upstream
 [pull]
