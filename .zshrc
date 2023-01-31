@@ -62,6 +62,7 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt appendhistory autocd extendedglob nonomatch
 setopt HIST_IGNORE_DUPS  # don't save consecutive duplicate entries
+setopt HIST_IGNORE_SPACE  # don't save lines where the first character is a space
 setopt HIST_NO_STORE  # don't save history/fc
 setopt HIST_REDUCE_BLANKS  # remove blank lines from history
 HISTORY_IGNORE='(fg|cd ..|ls|ls -l|ls -la)'
