@@ -193,3 +193,5 @@ if command -v rg 2>&1 >/dev/null; then
     # Try to get used to ripgrep
     alias ag=rg
 fi
+
+alias widediff="diff --suppress-common-lines --color=always -y -W $COLUMNS"
