@@ -10,6 +10,7 @@
 [help]
     autocorrect = 1
 [init]
+    defaultBranch = main
     # templatedir = ~/.git_template
 [github]
     user = mikewadsten
@@ -75,7 +76,7 @@
 ; [http]
 ;     sslVerify = false
 [commit]
-    verbose = true
+	verbose = true
 [push]
     default = upstream
 [pull]
