@@ -82,6 +82,12 @@
 [pull]
     # Never start a merge when pulling
     ff = only
+[branch]
+    # `git checkout -b blah starting/point` -> DON'T assume I want to treat
+    # starting/point as the remote tracking branch for this new branch.
+    # (Otherwise, `-b blah origin/master`, then `git push origin blah` results
+    # in pushing to master! Yikes!)
+    autoSetupMerge = false
 [tag]
     sort = -version:refname
 [include]
